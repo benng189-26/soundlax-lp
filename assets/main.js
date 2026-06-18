@@ -1,4 +1,4 @@
-// SoundLax landing page — interactions
+// SoundLax landing page - interactions
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* -------------------------------------------------
-     Scroll reveal — animate once, then stop
+     Scroll reveal - animate once, then stop
   ------------------------------------------------- */
   // auto-tag elements that should reveal on scroll
   var revealSelectors = [
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }, 150);
 
   /* -------------------------------------------------
-     FAQ accordion — one open at a time
+     FAQ accordion - one open at a time
   ------------------------------------------------- */
   var faqItems = document.querySelectorAll('.faq-item');
   faqItems.forEach(function (item) {

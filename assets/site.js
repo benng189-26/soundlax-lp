@@ -1,5 +1,5 @@
 /* ===================================================================
-   Bentoji Studio — shared site behaviour
+   Bentoji Studio - shared site behaviour
    =================================================================== */
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -85,8 +85,8 @@
 
   function cardHTML(p) {
     var thumb = p.thumb
-      ? '<div class="thumb-art"><img src="' + p.thumb + '" alt="' + esc(p.title) + '" loading="lazy"><div class="glass"></div></div>'
-      : '<div class="thumb-art" style="--c1:' + p.c1 + ';--c2:' + p.c2 + ';--c3:' + p.c3 + '"><div class="mesh"></div><div class="glass"></div></div>';
+      ? '<div class="thumb-art"><img src="' + p.thumb + '" alt="' + esc(p.title) + '" loading="lazy"></div>'
+      : '<div class="thumb-art"><div class="mesh"></div></div>';
     return '' +
       '<a class="work-card reveal" href="' + projectHref(p) + '"' + (p.external ? ' target="_blank" rel="noopener"' : '') + '>' +
         thumb +
@@ -119,7 +119,7 @@
     var slug = new URLSearchParams(location.search).get('p');
     var p = window.PROJECTS.filter(function (x) { return x.slug === slug; })[0];
     if (!p) { location.replace('/portfolio'); return; }
-    document.title = p.title + ' — Bentoji Studio';
+    document.title = p.title + ' - Bentoji Studio';
 
     var facts = (p.facts || []).map(function (f) {
       return '<div class="fact"><div class="k">' + esc(f.k) + '</div><div class="v">' + esc(f.v) + '</div></div>';
@@ -132,13 +132,13 @@
     }).join('');
 
     var shots = (p.gallery || []).map(function (src, i) {
-      return '<figure class="shot"><img src="' + src + '" alt="' + esc(p.title) + ' — screen ' + (i + 1) + '" loading="lazy"></figure>';
+      return '<figure class="shot"><img src="' + src + '" alt="' + esc(p.title) + ' - screen ' + (i + 1) + '" loading="lazy"></figure>';
     }).join('');
 
     var coverImg = p.cover || p.thumb;
     var cover = coverImg
       ? '<div class="thumb-art"><img src="' + coverImg + '" alt="' + esc(p.title) + '"></div>'
-      : '<div class="thumb-art" style="--c1:' + p.c1 + ';--c2:' + p.c2 + ';--c3:' + p.c3 + '"><div class="mesh"></div></div>';
+      : '<div class="thumb-art"><div class="mesh"></div></div>';
 
     var visit = p.visit ? '<div class="hero-actions"><a class="btn btn-light" href="' + p.visit + '">Visit project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>' : '';
 
@@ -176,7 +176,7 @@
       var btn = form.querySelector('button[type=submit]');
       var key = form.querySelector('input[name=access_key]');
       if (!key || /YOUR_WEB3FORMS/.test(key.value)) {
-        if (note) { note.className = 'form-note err'; note.textContent = 'Form not configured yet — add your Web3Forms access key.'; }
+        if (note) { note.className = 'form-note err'; note.textContent = 'Form not configured yet - add your Web3Forms access key.'; }
         return;
       }
       var data = Object.fromEntries(new FormData(form).entries());
@@ -187,7 +187,7 @@
         body: JSON.stringify(data)
       }).then(function (r) { return r.json(); }).then(function (res) {
         if (res.success) {
-          if (note) { note.className = 'form-note ok'; note.textContent = 'Thanks — your message is on its way.'; }
+          if (note) { note.className = 'form-note ok'; note.textContent = 'Thanks - your message is on its way.'; }
           form.reset();
         } else { throw new Error(res.message || 'failed'); }
       }).catch(function () {

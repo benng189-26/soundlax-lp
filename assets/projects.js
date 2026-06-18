@@ -1,5 +1,5 @@
 /* ===================================================================
-   Bentoji Studio — portfolio data (single source of truth)
+   Bentoji Studio - portfolio data (single source of truth)
    Real projects, copy, thumbnails and screenshots from Ben's
    "BN Selected works | 2026" Figma case studies.
    To ADD a project: copy a block and edit.
@@ -13,7 +13,7 @@ window.PROJECTS = [
     title: 'SoundLax',
     year: '2026',
     category: 'Product & App Design',
-    tagline: 'An ambient sound app for focus, rest, and sleep — designed to ask for less of your attention.',
+    tagline: 'An ambient sound app for focus, rest, and sleep - designed to ask for less of your attention.',
     thumb: '/assets/img/hero-bg.jpg',
     link: '/soundlax-app',
     external: false
@@ -49,7 +49,7 @@ window.PROJECTS = [
     title: 'Re-Leased',
     year: '2025',
     category: 'Website',
-    tagline: 'A platform for commercial landlords, property managers, and tenants — streamlining lease, maintenance, compliance, and accounting with automation and AI-powered workflows.',
+    tagline: 'A platform for commercial landlords, property managers, and tenants - streamlining lease, maintenance, compliance, and accounting with automation and AI-powered workflows.',
     location: 'NZ & Global · Commercial Property Management Software',
     thumb: '/assets/img/work/re-leased.jpg',
     gallery: ['/assets/img/work/re-leased-2.jpg', '/assets/img/work/re-leased-8.jpg', '/assets/img/work/re-leased-9.jpg', '/assets/img/work/re-leased-11.jpg', '/assets/img/work/re-leased-12.jpg'],
@@ -71,7 +71,7 @@ window.PROJECTS = [
     title: 'Lannock / Strata Finance',
     year: '2025',
     category: 'Customer Portal',
-    tagline: 'A customer portal for a finance platform — simplifying complex loan workflows, document management, and multi-user access.',
+    tagline: 'A customer portal for a finance platform - simplifying complex loan workflows, document management, and multi-user access.',
     location: 'New Zealand · Finance',
     thumb: '/assets/img/work/lannock.jpg',
     gallery: ['/assets/img/work/lannock-2.jpg', '/assets/img/work/lannock-3.jpg', '/assets/img/work/lannock-4.jpg', '/assets/img/work/lannock-5.jpg', '/assets/img/work/lannock-6.jpg', '/assets/img/work/lannock-7.jpg'],
@@ -89,7 +89,7 @@ window.PROJECTS = [
       { h: 'The problem' },
       { p: 'Strata managers had to manage multiple buildings, submit loan proposals, and handle large volumes of financial documents. Communication was fragmented across email, phone calls and an outdated system; users lacked visibility into application status; coordination between stakeholders was inconsistent and error-prone; document-heavy workflows created confusion around actions and responsibilities; and financial-compliance constraints added complexity to every interaction.' },
       { h: 'Key solutions' },
-      { list: ['Structured workflows into clear, repeatable stages: Application → Conditions → Validation → Decision', 'A status and label system designed for visibility — surfacing what needs attention, what is complete, and what is blocked', 'Information organised into clear sections with reused layout patterns, prioritising key actions over supporting detail', 'Designed for repetition and scale — supporting repeated use across many buildings, applications, and users without adding complexity'] },
+      { list: ['Structured workflows into clear, repeatable stages: Application → Conditions → Validation → Decision', 'A status and label system designed for visibility - surfacing what needs attention, what is complete, and what is blocked', 'Information organised into clear sections with reused layout patterns, prioritising key actions over supporting detail', 'Designed for repetition and scale - supporting repeated use across many buildings, applications, and users without adding complexity'] },
       { h: 'What changed' },
       { list: ['A clear, intuitive IA supporting multiple user types (owners, managers, tenants)', 'Complex financial and application processes became easier to manage, navigate and understand', 'Internal teams benefited from more consistent data capture and reduced administrative overhead', 'Document-heavy interactions were streamlined into guided journeys, improving usability for non-technical users'] }
     ]
@@ -100,7 +100,7 @@ window.PROJECTS = [
     title: 'TEDxAuckland',
     year: '2024',
     category: 'Website',
-    tagline: 'A website presenting speakers, ideas, and event information in a clear, engaging format — celebrating bold ideas from Aotearoa.',
+    tagline: 'A website presenting speakers, ideas, and event information in a clear, engaging format - celebrating bold ideas from Aotearoa.',
     location: 'Auckland, NZ · Independent TED event',
     thumb: '/assets/img/work/tedxauckland.jpg',
     gallery: ['/assets/img/work/tedxauckland-1.jpg', '/assets/img/work/tedxauckland-3.jpg', '/assets/img/work/tedxauckland-4.jpg', '/assets/img/work/tedxauckland-5.jpg', '/assets/img/work/tedxauckland-6.jpg'],
@@ -115,7 +115,7 @@ window.PROJECTS = [
       { h: 'The needs' },
       { p: 'The organisation needed a refreshed online presence to better reflect the energy of its events, a solution for online ticket booking, and a way to highlight speaker content to engage a diverse local audience.' },
       { h: 'Key decisions' },
-      { list: ['Prioritising scannability over density — clear sections with strong hierarchy, short blocks instead of long paragraphs, and reusable content modules', 'Easier navigation across content — speakers, schedule and tickets are easy to find', 'A stronger focus on speakers, letting users explore content quickly without leaving the page', 'Multi-entry discovery paths — browse by speaker, topic, or previous talks rather than one forced journey'] }
+      { list: ['Prioritising scannability over density - clear sections with strong hierarchy, short blocks instead of long paragraphs, and reusable content modules', 'Easier navigation across content - speakers, schedule and tickets are easy to find', 'A stronger focus on speakers, letting users explore content quickly without leaving the page', 'Multi-entry discovery paths - browse by speaker, topic, or previous talks rather than one forced journey'] }
     ]
   },
 
@@ -148,7 +148,7 @@ window.PROJECTS = [
     title: 'Kapili Roofing & Painting',
     year: '2023',
     category: 'Website',
-    tagline: 'A website redesign repositioning solar roofing as a premium offering — improving clarity, trust, and conversion for high-value decisions.',
+    tagline: 'A website redesign repositioning solar roofing as a premium offering - improving clarity, trust, and conversion for high-value decisions.',
     location: 'Hawaii, US · Roofing & Solar',
     thumb: '/assets/img/work/kapili.jpg',
     gallery: ['/assets/img/work/kapili-2.jpg', '/assets/img/work/kapili-4.jpg', '/assets/img/work/kapili-9.jpg', '/assets/img/work/kapili-11.jpg', '/assets/img/work/kapili-13.jpg'],
@@ -160,11 +160,11 @@ window.PROJECTS = [
     body: [
       { h: 'Client overview' },
       { p: 'Kapili Roofing & Painting provides roofing, painting, and solar solutions, helping homeowners invest in durable, storm-resistant upgrades suited for Hawaii’s climate.' },
-      { p: 'Kapili required a website redesign to better position its solar roofing solution as a premium, future-focused offering — communicating the benefits more clearly, building trust, and supporting users in higher-consideration decisions.' },
+      { p: 'Kapili required a website redesign to better position its solar roofing solution as a premium, future-focused offering - communicating the benefits more clearly, building trust, and supporting users in higher-consideration decisions.' },
       { h: 'The challenge' },
       { list: ['Reposition solar roofing as a premium, modern upgrade', 'Help customers understand a relatively complex product (roofing + solar) clearly', 'Improve project showcase and technical education', 'Reduce friction in the quote and enquiry process'] },
       { h: 'Solutions' },
-      { list: ['Elevated visual direction to reflect high-end, future-ready solutions', 'Structured content to guide users from exploration → validation → enquiry', 'Introduced interactive tools (a pricing Calculator) to simplify quoting', 'Built an advanced gallery — images and video to showcase real projects', 'CMS + CRM integration — an end-to-end system for content, lead tracking, and follow-up'] }
+      { list: ['Elevated visual direction to reflect high-end, future-ready solutions', 'Structured content to guide users from exploration → validation → enquiry', 'Introduced interactive tools (a pricing Calculator) to simplify quoting', 'Built an advanced gallery - images and video to showcase real projects', 'CMS + CRM integration - an end-to-end system for content, lead tracking, and follow-up'] }
     ]
   }
 ];
