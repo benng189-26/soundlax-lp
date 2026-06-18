@@ -132,7 +132,7 @@
     }).join('');
 
     var shots = (p.gallery || []).map(function (src, i) {
-      return '<figure class="shot reveal"><img src="' + src + '" alt="' + esc(p.title) + ' — screen ' + (i + 1) + '" loading="lazy"></figure>';
+      return '<figure class="shot"><img src="' + src + '" alt="' + esc(p.title) + ' — screen ' + (i + 1) + '" loading="lazy"></figure>';
     }).join('');
 
     var coverImg = p.cover || p.thumb;
