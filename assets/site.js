@@ -154,6 +154,18 @@
         '<div class="work-body">' + body + '</div>' +
         (shots ? '<div class="work-shots">' + shots + '</div>' : '') +
       '</div>';
+
+    // the detail HTML was injected after the page-load reveal observer ran,
+    // so observe the newly-added .reveal elements now (otherwise they stay hidden).
+    var newReveals = root.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var dio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); dio.unobserve(e.target); } });
+      }, { threshold: 0.06 });
+      newReveals.forEach(function (el) { dio.observe(el); });
+    } else {
+      newReveals.forEach(function (el) { el.classList.add('in'); });
+    }
   }
 
   /* ---------- Web3Forms ---------- */
