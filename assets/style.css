@@ -123,7 +123,7 @@ p{margin:0 0 1.1rem;color:var(--text);}
 .hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;overflow:hidden;padding-bottom:8vh;}
 .hero-bg{
   position:absolute;inset:0;
-  background:url("https://bentoji.co.nz/wp-content/uploads/2026/05/hero-banner-6.jpg") center/cover no-repeat;
+  background:url("img/hero-bg.jpg") center/cover no-repeat;
   transform:scale(1.04);
 }
 .hero-overlay{
@@ -186,8 +186,8 @@ html.js .reveal.in{opacity:1;transform:none;}
 /* rain museum */
 .rain{
   text-align:center;
-  background:linear-gradient(180deg,#0a0a0a,#0e0e12 50%,#0a0a0a),
-    url("https://bentoji.co.nz/wp-content/uploads/2026/05/hero-banner-6.jpg") center/cover fixed;
+  background:linear-gradient(180deg,#0a0a0a,rgba(14,14,18,.6) 50%,#0a0a0a),
+    url("img/hero-bg.jpg") center/cover fixed;
   background-blend-mode:multiply;
   position:relative;
 }
@@ -262,6 +262,7 @@ html.js .reveal.in{opacity:1;transform:none;}
 .cta-inner{max-width:900px;margin:0 auto;}
 .cta-wordmark{max-width:340px;margin:0 auto 30px;opacity:.95;}
 .cta-title{margin-bottom:1rem;}
+.cta-title .line{display:block;}
 .cta-sub{color:var(--muted);margin-bottom:2rem;}
 .appstore-badge{display:inline-block;}
 .appstore-badge img{height:48px;width:auto;}
