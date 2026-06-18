@@ -14,17 +14,17 @@
       requestAnimationFrame(raf);
     }
 
-    /* ---- in-page anchor smooth scroll ---- */
-    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    /* ---- in-page anchor smooth scroll (delegated, covers dynamically-added links) ---- */
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+      if (!a) return;
       var h = a.getAttribute('href');
       if (!h || h.length < 2) return;
-      a.addEventListener('click', function (e) {
-        var t = document.querySelector(h);
-        if (!t) return;
-        e.preventDefault();
-        if (lenis) lenis.scrollTo(t, { offset: -70, duration: 1.1 });
-        else t.scrollIntoView({ behavior: 'smooth' });
-      });
+      var t = document.querySelector(h);
+      if (!t) return;
+      e.preventDefault();
+      if (lenis) lenis.scrollTo(t, { offset: -90, duration: 1.1 });
+      else t.scrollIntoView({ behavior: 'smooth' });
     });
 
     /* ---- external links open in new tab ---- */
@@ -125,11 +125,13 @@
       return '<div class="fact"><div class="k">' + esc(f.k) + '</div><div class="v">' + esc(f.v) + '</div></div>';
     }).join('');
 
+    var toc = [];
     var body = (p.body || []).map(function (b) {
-      if (b.h) return '<h3>' + esc(b.h) + '</h3>';
+      if (b.h) { var id = 's-' + slugify(b.h); toc.push('<a href="#' + id + '">' + esc(b.h) + '</a>'); return '<h3 id="' + id + '">' + esc(b.h) + '</h3>'; }
       if (b.list) return '<ul class="work-list">' + b.list.map(function (li) { return '<li>' + esc(li) + '</li>'; }).join('') + '</ul>';
       return '<p>' + esc(b.p) + '</p>';
     }).join('');
+    var tocHTML = toc.length ? '<nav class="work-toc" aria-label="Sections">' + toc.join('') + '</nav>' : '';
 
     var shots = (p.gallery || []).map(function (src, i) {
       return '<figure class="shot"><img src="' + src + '" alt="' + esc(p.title) + ' - screen ' + (i + 1) + '" loading="lazy"></figure>';
@@ -143,16 +145,23 @@
     var visit = p.visit ? '<div class="hero-actions"><a class="btn btn-light" href="' + p.visit + '">Visit project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>' : '';
 
     root.innerHTML =
-      '<div class="container work-hero">' +
-        '<a class="text-link" href="/portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> All work</a>' +
-        '<div class="cat" style="margin-top:24px">' + esc(p.category) + '</div>' +
-        '<h1>' + esc(p.title) + '</h1>' +
-        (p.location ? '<p class="loc" style="margin-top:10px">' + esc(p.location) + '</p>' : '') +
-        '<p class="lead">' + esc(p.tagline) + '</p>' + visit +
-        '<div class="work-cover">' + cover + '</div>' +
-        '<div class="work-facts">' + facts + '</div>' +
-        '<div class="work-body">' + body + '</div>' +
-        (shots ? '<div class="work-shots">' + shots + '</div>' : '') +
+      '<div class="container work-detail">' +
+        '<a class="text-link work-back" href="/portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> All work</a>' +
+        '<div class="work-detail-grid">' +
+          '<aside class="work-side reveal">' +
+            '<div class="cat">' + esc(p.category) + '</div>' +
+            '<h1>' + esc(p.title) + '</h1>' +
+            (p.location ? '<p class="loc">' + esc(p.location) + '</p>' : '') +
+            '<div class="work-facts">' + facts + '</div>' +
+            tocHTML + visit +
+          '</aside>' +
+          '<div class="work-main reveal d1">' +
+            '<p class="lead">' + esc(p.tagline) + '</p>' +
+            '<div class="work-cover">' + cover + '</div>' +
+            '<div class="work-body">' + body + '</div>' +
+            (shots ? '<div class="work-shots">' + shots + '</div>' : '') +
+          '</div>' +
+        '</div>' +
       '</div>';
 
     // the detail HTML was injected after the page-load reveal observer ran,
@@ -199,4 +208,5 @@
   }
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
+  function slugify(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
 })();
