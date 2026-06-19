@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
           io.unobserve(e.target); // reveal once, then stop
         }
       });
-    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0.06, rootMargin: "0px" });
 
     // gentle stagger for grouped items
     reveals.forEach(function (el) { io.observe(el); });
