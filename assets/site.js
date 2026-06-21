@@ -330,8 +330,7 @@
       if (!reduce) loop();
     }, { passive: true });
 
-    resize();
-    if (!reduce) loop();
+    requestAnimationFrame(function() { resize(); if (!reduce) loop(); });
   })();
 
 })();
