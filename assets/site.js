@@ -67,7 +67,39 @@
       reveals.forEach(function (el) { el.classList.add('in'); });
     }
 
-    /* ---- current year ---- */
+    /* ---- CMS homepage content ---- */
+    if (document.querySelector('[data-cms]')) {
+      function escCms(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+      fetch('/content/homepage.json')
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          document.querySelectorAll('[data-cms]').forEach(function (el) {
+            var key = el.getAttribute('data-cms');
+            var val;
+            if      (key === 'hero-title')    val = d.hero && d.hero.title;
+            else if (key === 'hero-lead')     val = d.hero && d.hero.lead;
+            else if (key === 'about-eyebrow') val = d.about && d.about.eyebrow;
+            else if (key === 'about-heading') val = d.about && d.about.heading;
+            else if (key === 'about-body') {
+              var paras = d.about && d.about.paragraphs;
+              if (paras && paras.length) {
+                el.innerHTML = paras.map(function (p) { return '<p>' + escCms(p) + '</p>'; }).join('');
+              }
+              return;
+            }
+            else if (key === 'cta-heading') val = d.cta && d.cta.heading;
+            else if (key === 'cta-body')    val = d.cta && d.cta.body;
+            if (val != null) el.textContent = val;
+          });
+        })
+        .catch(function () {});
+    }
+
+        /* ---- current year ---- */
     document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
     /* ---- render portfolio (if a target exists & PROJECTS available) ---- */

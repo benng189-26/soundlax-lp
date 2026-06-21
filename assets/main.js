@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
   /* -------------------------------------------------
      Scroll reveal - animate once, then stop
   ------------------------------------------------- */
-  // auto-tag elements that should reveal on scroll
   var revealSelectors = [
     '.section-head', '.meet-copy', '.meet-media', '.diff-media',
     '.feature-media', '.support-copy', '.support-media',
@@ -87,12 +86,10 @@ document.addEventListener('DOMContentLoaded', function () {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
           e.target.classList.add('in');
-          io.unobserve(e.target); // reveal once, then stop
+          io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.06, rootMargin: "0px" });
-
-    // gentle stagger for grouped items
+    }, { threshold: 0.06, rootMargin: '0px' });
     reveals.forEach(function (el) { io.observe(el); });
   } else {
     reveals.forEach(function (el) { el.classList.add('in'); });
@@ -102,55 +99,6 @@ document.addEventListener('DOMContentLoaded', function () {
   setTimeout(function () {
     document.querySelectorAll('.hero .reveal').forEach(function (el) { el.classList.add('in'); });
   }, 150);
-
-  /* -------------------------------------------------
-     FAQ accordion - smooth animated expand/collapse
-  ------------------------------------------------- */
-  (function () {
-    var faqItems = document.querySelectorAll('.faq-item');
-
-    function closeItem(it) {
-      var b = it.querySelector('.faq-body');
-      if (!b) return;
-      b.style.maxHeight = b.scrollHeight + 'px';
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          b.style.maxHeight = '0';
-          it.classList.remove('is-open');
-        });
-      });
-      setTimeout(function () { it.open = false; }, 390);
-    }
-
-    function openItem(it) {
-      var b = it.querySelector('.faq-body');
-      if (!b) return;
-      it.open = true;           // make <details> reveal the content
-      b.style.maxHeight = '0';  // immediately collapse via CSS height
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          it.classList.add('is-open');
-          b.style.maxHeight = (b.scrollHeight + 30) + 'px';
-        });
-      });
-    }
-
-    faqItems.forEach(function (item) {
-      var summary = item.querySelector('summary');
-      if (!summary) return;
-      item.open = false; // ensure all start closed
-
-      summary.addEventListener('click', function (e) {
-        e.preventDefault();
-        var isOpen = item.classList.contains('is-open');
-        // close all others
-        faqItems.forEach(function (other) {
-          if (other !== item && other.classList.contains('is-open')) closeItem(other);
-        });
-        if (isOpen) { closeItem(item); } else { openItem(item); }
-      });
-    });
-  })();
 
   /* -------------------------------------------------
      Newsletter form (front-end only)
@@ -170,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /* ═══════════════════════════════════════════════════════
-   Premium: nav frost-on-scroll + Rain Museum waveform
+   Premium: nav frost + Rain Museum waveform + content loading
 ═══════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -224,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function () {
       var w = canvas.offsetWidth;
       var h = canvas.offsetHeight;
       ctx.clearRect(0, 0, w, h);
-
       var barW = Math.max(2, (w - (BAR_COUNT - 1) * GAP) / BAR_COUNT);
       bars.forEach(function (bar, i) {
         var wave   = Math.sin(bar.phase + t * bar.speed);
@@ -242,12 +189,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         ctx.fill();
       });
-
       t += 0.016;
       requestAnimationFrame(draw);
     }
 
-    /* start only when visible — saves CPU on hidden pages */
     if ('IntersectionObserver' in window) {
       var wObs = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
@@ -259,7 +204,6 @@ document.addEventListener('DOMContentLoaded', function () {
       running = true; draw();
     }
   })();
-
 
   /* ── Hero video: fade in only when frames are ready ── */
   (function () {
@@ -275,79 +219,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('click', tryPlay, { once: true });
   })();
 
-  /* ── Testimonials: carousel with auto-advance ── */
-  (function () {
-    var track    = document.getElementById('testiTrack');
-    var carousel = document.getElementById('testiCarousel');
-    var dots     = document.querySelectorAll('.testi-dot');
-    if (!track || !dots.length) return;
-    var current  = 0;
-    var total    = dots.length;
-    var autoTimer;
-
-    function goTo(n) {
-      current = ((n % total) + total) % total;
-      track.style.transform = 'translateX(-' + (current * 100) + '%)';
-      dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
-    }
-
-    function startAuto() {
-      clearInterval(autoTimer);
-      autoTimer = setInterval(function () { goTo(current + 1); }, 5500);
-    }
-
-    function resetAuto() { clearInterval(autoTimer); startAuto(); }
-
-    dots.forEach(function (dot) {
-      dot.addEventListener('click', function () { goTo(+this.dataset.page); resetAuto(); });
-    });
-
-    // touch swipe
-    var startX = 0;
-    track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; clearInterval(autoTimer); }, { passive: true });
-    track.addEventListener('touchend', function (e) {
-      var dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) > 40) { goTo(dx < 0 ? current + 1 : current - 1); startAuto(); }
-    }, { passive: true });
-
-    // Pause on hover
-    if (carousel) {
-      carousel.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
-      carousel.addEventListener('mouseleave', startAuto);
-    }
-
-    // Prev / next buttons
-    var prevBtn = document.getElementById('testiPrev');
-    var nextBtn = document.getElementById('testiNext');
-    function updateBtns() {
-      if (prevBtn) prevBtn.disabled = (current === 0);
-      if (nextBtn) nextBtn.disabled = (current === total - 1);
-    }
-    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); resetAuto(); updateBtns(); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); resetAuto(); updateBtns(); });
-
-    updateBtns();
-    startAuto();
-  })();
-
-  /* ── Testimonials: read more toggle ── */
-  (function () {
-    document.querySelectorAll('.testi-more').forEach(function (btn) {
-      var body = btn.previousElementSibling;
-      // hide button if text isn't clamped
-      if (body && body.scrollHeight <= body.clientHeight + 4) {
-        btn.classList.add('hidden');
-        return;
-      }
-      var expanded = false;
-      btn.addEventListener('click', function () {
-        expanded = !expanded;
-        body.classList.toggle('expanded', expanded);
-        btn.textContent = expanded ? 'Read less' : 'Read more';
-      });
-    });
-  })();
-
   /* ── Rain Museum: cycling tag highlight ── */
   (function () {
     var tags = Array.from(document.querySelectorAll('.rain-tag'));
@@ -361,6 +232,198 @@ document.addEventListener('DOMContentLoaded', function () {
     nextTag();
     setInterval(nextTag, 1800);
   })();
+
+  /* -------------------------------------------------
+     CMS content loading helpers
+  ------------------------------------------------- */
+
+  function escHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  /* ── Testimonials carousel ── */
+  function initCarousel() {
+    var track    = document.getElementById('testiTrack');
+    var carousel = document.getElementById('testiCarousel');
+    var dots     = document.querySelectorAll('.testi-dot');
+    if (!track || !dots.length) return;
+
+    var current  = 0;
+    var total    = dots.length;
+    var autoTimer;
+
+    function goTo(n) {
+      current = ((n % total) + total) % total;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+      updateBtns();
+    }
+    function startAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(function () { goTo(current + 1); }, 5500);
+    }
+    function resetAuto() { clearInterval(autoTimer); startAuto(); }
+    function updateBtns() {
+      var prevBtn = document.getElementById('testiPrev');
+      var nextBtn = document.getElementById('testiNext');
+      if (prevBtn) prevBtn.disabled = (current === 0);
+      if (nextBtn) nextBtn.disabled = (current === total - 1);
+    }
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () { goTo(+this.dataset.page); resetAuto(); });
+    });
+
+    var startX = 0;
+    track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; clearInterval(autoTimer); }, { passive: true });
+    track.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) { goTo(dx < 0 ? current + 1 : current - 1); startAuto(); }
+    }, { passive: true });
+
+    if (carousel) {
+      carousel.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+      carousel.addEventListener('mouseleave', startAuto);
+    }
+
+    var prevBtn = document.getElementById('testiPrev');
+    var nextBtn = document.getElementById('testiNext');
+    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); resetAuto(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); resetAuto(); });
+
+    updateBtns();
+    startAuto();
+  }
+
+  function initReadMore() {
+    document.querySelectorAll('.testi-more').forEach(function (btn) {
+      var body = btn.previousElementSibling;
+      if (body && body.scrollHeight <= body.clientHeight + 4) {
+        btn.classList.add('hidden');
+        return;
+      }
+      var expanded = false;
+      btn.addEventListener('click', function () {
+        expanded = !expanded;
+        body.classList.toggle('expanded', expanded);
+        btn.textContent = expanded ? 'Read less' : 'Read more';
+      });
+    });
+  }
+
+  function renderTestimonials(data) {
+    var track = document.getElementById('testiTrack');
+    var dotsEl = document.getElementById('testiDots');
+    if (!track || !dotsEl) return;
+
+    var reviews = data.reviews || [];
+    var perPage = data.perPage || 3;
+    var pages = [];
+    for (var i = 0; i < reviews.length; i += perPage) {
+      pages.push(reviews.slice(i, i + perPage));
+    }
+
+    track.innerHTML = pages.map(function (page) {
+      return '<div class="testi-page">' + page.map(function (r) {
+        return '<blockquote class="testi">' +
+          '<div class="testi-stars">★★★★★</div>' +
+          '<h4 class="testi-title">' + escHtml(r.title) + '</h4>' +
+          '<div class="testi-body"><p>' + escHtml(r.body) + '</p></div>' +
+          '<button class="testi-more" aria-label="Read more">Read more</button>' +
+          '<footer>' +
+          '<span class="name">' + escHtml(r.name) + '</span>' +
+          '<span class="role">' + escHtml(r.date) + ' · ' + escHtml(r.country) + '</span>' +
+          '</footer>' +
+          '</blockquote>';
+      }).join('') + '</div>';
+    }).join('');
+
+    dotsEl.innerHTML = pages.map(function (_, i) {
+      return '<button class="testi-dot' + (i === 0 ? ' active' : '') +
+        '" data-page="' + i + '" aria-label="Page ' + (i + 1) + '"></button>';
+    }).join('');
+
+    initCarousel();
+    initReadMore();
+  }
+
+  /* ── FAQ accordion ── */
+  function initFAQ() {
+    var faqItems = document.querySelectorAll('.faq-item');
+
+    function closeItem(it) {
+      var b = it.querySelector('.faq-body');
+      if (!b) return;
+      b.style.maxHeight = b.scrollHeight + 'px';
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          b.style.maxHeight = '0';
+          it.classList.remove('is-open');
+        });
+      });
+      setTimeout(function () { it.open = false; }, 390);
+    }
+
+    function openItem(it) {
+      var b = it.querySelector('.faq-body');
+      if (!b) return;
+      it.open = true;
+      b.style.maxHeight = '0';
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          it.classList.add('is-open');
+          b.style.maxHeight = (b.scrollHeight + 30) + 'px';
+        });
+      });
+    }
+
+    faqItems.forEach(function (item) {
+      var summary = item.querySelector('summary');
+      if (!summary) return;
+      item.open = false;
+      summary.addEventListener('click', function (e) {
+        e.preventDefault();
+        var isOpen = item.classList.contains('is-open');
+        faqItems.forEach(function (other) {
+          if (other !== item && other.classList.contains('is-open')) closeItem(other);
+        });
+        if (isOpen) { closeItem(item); } else { openItem(item); }
+      });
+    });
+  }
+
+  function renderFAQ(data) {
+    var list = document.getElementById('faqList');
+    if (!list) return;
+    list.innerHTML = (data.items || []).map(function (item) {
+      return '<details class="faq-item">' +
+        '<summary>' + escHtml(item.question) + '</summary>' +
+        '<div class="faq-body">' + item.answer + '</div>' +
+        '</details>';
+    }).join('');
+    initFAQ();
+  }
+
+  /* ── Fetch and render CMS content ── */
+  var track = document.getElementById('testiTrack');
+  if (track) {
+    fetch('/content/testimonials.json')
+      .then(function (r) { return r.json(); })
+      .then(renderTestimonials)
+      .catch(function () { initCarousel(); initReadMore(); });
+  }
+
+  var faqList = document.getElementById('faqList');
+  if (faqList) {
+    fetch('/content/faq.json')
+      .then(function (r) { return r.json(); })
+      .then(renderFAQ)
+      .catch(function () { initFAQ(); });
+  }
 
   /* section-by-section scroll handled by CSS scroll-snap */
 

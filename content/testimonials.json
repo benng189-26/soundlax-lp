@@ -1,0 +1,47 @@
+{
+  "perPage": 3,
+  "reviews": [
+    {
+      "name": "Lucy Nguyen VN",
+      "date": "Jun 9, 2026",
+      "country": "Vietnam",
+      "title": "This is my absolute favorite app!",
+      "body": "It helps me fall asleep easily and wakes me up gently with light rain in the morning, such a peaceful routine. The UI is beautiful, smooth and super convenient to use with just a few clicks. I just really wish it could auto-save any tweaks I made to existing mixes so they will be ready next time without me having to manually readjust. Still 5 stars for this amazing app! Highly recommend!"
+    },
+    {
+      "name": "SthRomaniNZ",
+      "date": "Jun 8, 2026",
+      "country": "Vietnam",
+      "title": "Perfect for Focus and Unwinding",
+      "body": "Really impressed with this app. The sound quality is lovely, especially the rain and nature tracks, and the overall experience feels polished and easy to use. I've been using it during work and in the evenings to unwind, and it's made a noticeable difference to my focus and stress levels. Great option for anyone looking for a simple, well-designed relaxation app."
+    },
+    {
+      "name": "samclin",
+      "date": "Jun 5, 2026",
+      "country": "Vietnam",
+      "title": "Beautiful UI",
+      "body": "Beautiful UI, incredibly smooth, and packed with great content. Best part? The Alarm function. It actually wakes me up like a civilized human being, unlike the default Apple alarm which sounds like a localized nuclear siren designed to trigger a fight-or-flight response. My nervous system thanks you."
+    },
+    {
+      "name": "Nanguyen1889",
+      "date": "Jun 9, 2026",
+      "country": "New Zealand",
+      "title": "Found it and love it!",
+      "body": "Finally, I found this app that allows me to adjust and personalize the sound. The playlists are great, but I prefer to create my own sound playlist for reading or working. I absolutely love it!"
+    },
+    {
+      "name": "ChungChungnn",
+      "date": "Jun 5, 2026",
+      "country": "New Zealand",
+      "title": "Very nice",
+      "body": "Nice app. I was sleeping very well."
+    },
+    {
+      "name": "おくぐミナ゙ラックス",
+      "date": "May 19, 2026",
+      "country": "Japan",
+      "title": "友人に勧めしてます",
+      "body": "このアプリ本当に良いです！今まで作業や家事をする時に、作業用BGMをYouTubeで探すことと思っていたのに比べ、もうという方に30分渶けてしまったなんてことがよくありました。このアプリではそのようなことはないし、それぞれの音を組み合わせてプレイリストにできるのが！"
+    }
+  ]
+}

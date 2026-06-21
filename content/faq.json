@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "question": "What is SoundLax?",
+      "answer": "<p>SoundLax is a minimalist sound environment app designed for focus, relaxation, and sleep.</p><p>The goal is simple: less friction, better atmospheres, and quicker access to the sounds you actually want to hear.</p>"
+    },
+    {
+      "question": "Does SoundLax work offline?",
+      "answer": "<p>Short answer: Yes. Some sounds may require an internet connection depending on how they are streamed or updated. Offline support may expand over time.</p>"
+    },
+    {
+      "question": "How does Premium work?",
+      "answer": "<p>SoundLax Premium unlocks:</p><ul><li>Unlimited listening</li><li>Premium sound environments</li><li>Curated atmosphere mixes</li><li>Sleep-focused environments</li><li>Living backgrounds</li><li>Future sound updates</li></ul><p>Subscriptions are managed through your Apple ID account.</p>"
+    },
+    {
+      "question": "How do I manage or cancel my subscription?",
+      "answer": "<p>You can manage subscriptions anytime in:</p><p>Settings &rarr; Apple ID &rarr; Subscriptions</p>"
+    },
+    {
+      "question": "I found a bug or issue",
+      "answer": "<p>Please go to Settings and find Help and Support. Please send us your:</p><ul><li>device model</li><li>iOS version</li><li>what happened before the issue occurred</li></ul><p>This helps us fix things faster.</p>"
+    },
+    {
+      "question": "Will more sounds be added?",
+      "answer": "<p>Yep, but carefully. We want SoundLax to grow slowly with high-quality environments and curated sound spaces, without becoming overwhelming or cluttered.</p>"
+    }
+  ]
+}
