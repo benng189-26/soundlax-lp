@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     lenis = new Lenis({
       duration: 1.1,
       easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-      smoothWheel: true,
+      smoothWheel: false,
       touchMultiplier: 1.4
     });
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // auto-tag elements that should reveal on scroll
   var revealSelectors = [
     '.section-head', '.meet-copy', '.meet-media', '.diff-media',
-    '.feature-media', '.testi', '.support-copy', '.support-media',
+    '.feature-media', '.support-copy', '.support-media',
     '.rain-inner', '.newsletter-inner', '.cta-inner', '.faq-list', '.footer-grid'
   ];
   revealSelectors.forEach(function (sel) {
@@ -109,32 +109,45 @@ document.addEventListener('DOMContentLoaded', function () {
   (function () {
     var faqItems = document.querySelectorAll('.faq-item');
 
+    function closeItem(it) {
+      var b = it.querySelector('.faq-body');
+      if (!b) return;
+      b.style.maxHeight = b.scrollHeight + 'px';
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          b.style.maxHeight = '0';
+          it.classList.remove('is-open');
+        });
+      });
+      setTimeout(function () { it.open = false; }, 390);
+    }
+
+    function openItem(it) {
+      var b = it.querySelector('.faq-body');
+      if (!b) return;
+      it.open = true;           // make <details> reveal the content
+      b.style.maxHeight = '0';  // immediately collapse via CSS height
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          it.classList.add('is-open');
+          b.style.maxHeight = (b.scrollHeight + 30) + 'px';
+        });
+      });
+    }
+
     faqItems.forEach(function (item) {
       var summary = item.querySelector('summary');
-      var body    = item.querySelector('.faq-body');
-      if (!summary || !body) return;
-
-      // Remove native open/close so we control it
-      item.removeAttribute('open');
+      if (!summary) return;
+      item.open = false; // ensure all start closed
 
       summary.addEventListener('click', function (e) {
         e.preventDefault();
         var isOpen = item.classList.contains('is-open');
-
-        // Close any open item
+        // close all others
         faqItems.forEach(function (other) {
-          if (other.classList.contains('is-open')) {
-            var ob = other.querySelector('.faq-body');
-            ob.style.maxHeight = ob.scrollHeight + 'px';
-            requestAnimationFrame(function () { ob.style.maxHeight = '0'; });
-            other.classList.remove('is-open');
-          }
+          if (other !== item && other.classList.contains('is-open')) closeItem(other);
         });
-
-        if (!isOpen) {
-          item.classList.add('is-open');
-          body.style.maxHeight = body.scrollHeight + 'px';
-        }
+        if (isOpen) { closeItem(item); } else { openItem(item); }
       });
     });
   })();
@@ -303,6 +316,17 @@ document.addEventListener('DOMContentLoaded', function () {
       carousel.addEventListener('mouseleave', startAuto);
     }
 
+    // Prev / next buttons
+    var prevBtn = document.getElementById('testiPrev');
+    var nextBtn = document.getElementById('testiNext');
+    function updateBtns() {
+      if (prevBtn) prevBtn.disabled = (current === 0);
+      if (nextBtn) nextBtn.disabled = (current === total - 1);
+    }
+    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); resetAuto(); updateBtns(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); resetAuto(); updateBtns(); });
+
+    updateBtns();
     startAuto();
   })();
 
@@ -338,39 +362,6 @@ document.addEventListener('DOMContentLoaded', function () {
     setInterval(nextTag, 1800);
   })();
 
-  /* ── Section snapping: auto-scroll to nearest section after pause ── */
-  (function () {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var sections = Array.from(document.querySelectorAll('.hero, .section, .site-footer'));
-    var snapTimer = null;
-    var isSnapping = false;
-    var headerH = 88;
-
-    function snapNearest() {
-      if (isSnapping) return;
-      var best = null, bestDist = Infinity;
-      sections.forEach(function (s) {
-        var dist = Math.abs(s.getBoundingClientRect().top - headerH);
-        if (dist < bestDist) { bestDist = dist; best = s; }
-      });
-      if (!best || bestDist < 56) return;
-      isSnapping = true;
-      if (typeof lenis !== 'undefined' && lenis) {
-        lenis.scrollTo(best, { offset: -headerH, duration: 0.8, onComplete: function () {
-          setTimeout(function () { isSnapping = false; }, 300);
-        }});
-      } else {
-        var top = window.scrollY + best.getBoundingClientRect().top - headerH;
-        window.scrollTo({ top: top, behavior: 'smooth' });
-        setTimeout(function () { isSnapping = false; }, 900);
-      }
-    }
-
-    window.addEventListener('scroll', function () {
-      if (isSnapping) return;
-      clearTimeout(snapTimer);
-      snapTimer = setTimeout(snapNearest, 450);
-    }, { passive: true });
-  })();
+  /* section-by-section scroll handled by CSS scroll-snap */
 
 });

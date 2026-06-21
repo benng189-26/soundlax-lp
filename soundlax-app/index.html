@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="/assets/style.css?v=8" />
+<link rel="stylesheet" href="/assets/style.css?v=9" />
 
 <!-- enables JS-only reveal hiding (so content stays visible if JS fails) -->
 <script>document.documentElement.classList.add('js');</script>
@@ -241,7 +241,7 @@
 
         <!-- Page 1 -->
         <div class="testi-page">
-          <blockquote class="testi reveal">
+          <blockquote class="testi">
             <div class="testi-stars">★★★★★</div>
             <h4 class="testi-title">This is my absolute favorite app!</h4>
             <div class="testi-body">
@@ -251,7 +251,7 @@
             <footer><span class="name">Lucy Nguyen VN</span><span class="role">Jun 9, 2026 · Vietnam</span></footer>
           </blockquote>
 
-          <blockquote class="testi reveal">
+          <blockquote class="testi">
             <div class="testi-stars">★★★★★</div>
             <h4 class="testi-title">Perfect for Focus and Unwinding</h4>
             <div class="testi-body">
@@ -261,7 +261,7 @@
             <footer><span class="name">SthRomaniNZ</span><span class="role">Jun 8, 2026 · Vietnam</span></footer>
           </blockquote>
 
-          <blockquote class="testi reveal">
+          <blockquote class="testi">
             <div class="testi-stars">★★★★★</div>
             <h4 class="testi-title">Beautiful UI</h4>
             <div class="testi-body">
@@ -274,7 +274,7 @@
 
         <!-- Page 2 -->
         <div class="testi-page">
-          <blockquote class="testi reveal">
+          <blockquote class="testi">
             <div class="testi-stars">★★★★★</div>
             <h4 class="testi-title">Found it and love it!</h4>
             <div class="testi-body">
@@ -284,7 +284,7 @@
             <footer><span class="name">Nanguyen1889</span><span class="role">Jun 9, 2026 · New Zealand</span></footer>
           </blockquote>
 
-          <blockquote class="testi reveal">
+          <blockquote class="testi">
             <div class="testi-stars">★★★★★</div>
             <h4 class="testi-title">Very nice</h4>
             <div class="testi-body">
@@ -294,7 +294,7 @@
             <footer><span class="name">ChungChungnn</span><span class="role">Jun 5, 2026 · New Zealand</span></footer>
           </blockquote>
 
-          <blockquote class="testi reveal">
+          <blockquote class="testi">
             <div class="testi-stars">★★★★★</div>
             <h4 class="testi-title">友人に勧めしてます</h4>
             <div class="testi-body">
@@ -308,10 +308,18 @@
       </div><!-- /.testi-track -->
     </div><!-- /.testi-carousel -->
 
-    <!-- Dot indicators -->
-    <div class="testi-dots" id="testiDots" aria-label="Review pages">
+    <!-- Carousel navigation -->
+    <div class="testi-nav">
+      <button class="testi-btn" id="testiPrev" aria-label="Previous reviews">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="testi-dots" id="testiDots" aria-label="Review pages">
       <button class="testi-dot active" data-page="0" aria-label="Page 1"></button>
       <button class="testi-dot" data-page="1" aria-label="Page 2"></button>
+      </div>
+      <button class="testi-btn" id="testiNext" aria-label="Next reviews">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
 
   </div>
@@ -470,6 +478,6 @@
   </div>
 </footer>
 
-<script src="/assets/main.js?v=7"></script>
+<script src="/assets/main.js?v=8"></script>
 </body>
 </html>
