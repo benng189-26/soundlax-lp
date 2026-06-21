@@ -294,7 +294,7 @@
       }
     }
 
-    function loop() {
+    function drawFrame() {
       ctx.clearRect(0, 0, W, H);
       drawLines();
       for (var i = 0; i < particles.length; i++) {
@@ -305,6 +305,10 @@
         ctx.fillStyle = 'rgba(255,255,255,' + p.a + ')';
         ctx.fill();
       }
+    }
+
+    function loop() {
+      drawFrame();
       raf = requestAnimationFrame(loop);
     }
 
@@ -327,10 +331,33 @@
     window.addEventListener('resize', function () {
       cancelAnimationFrame(raf);
       resize();
-      if (!reduce) loop();
+      if (reduce) drawFrame(); else loop();
     }, { passive: true });
 
-    requestAnimationFrame(function() { resize(); if (!reduce) loop(); });
+    /* Robust init.
+       - rAF is suspended in hidden/background tabs, so a single rAF at load
+         can silently never fire. Wait for the tab to become visible first.
+       - The hero height may not be computed on the first frame, so retry
+         until offsetHeight is non-zero.
+       - Respect reduced motion by rendering one static frame (no loop). */
+    var started = false;
+    function start() {
+      if (started) return;
+      if (canvas.offsetHeight === 0) { requestAnimationFrame(start); return; }
+      started = true;
+      resize();
+      if (reduce) drawFrame(); else loop();
+    }
+    if (document.visibilityState === 'hidden') {
+      document.addEventListener('visibilitychange', function onVis() {
+        if (document.visibilityState === 'visible') {
+          document.removeEventListener('visibilitychange', onVis);
+          start();
+        }
+      });
+    } else {
+      requestAnimationFrame(start);
+    }
   })();
 
 })();
