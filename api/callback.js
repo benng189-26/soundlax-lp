@@ -1,11 +1,10 @@
-// Decap CMS GitHub OAuth - Step 2: exchange code for token and return to CMS
+// Decap CMS GitHub OAuth - Step 2: exchange code for token, post back to CMS window
 module.exports = async function handler(req, res) {
-  var code = req.query.code;
+  var code  = req.query.code;
   var error = req.query.error;
 
   if (error || !code) {
-    res.status(400).send('OAuth error: ' + (error || 'missing code'));
-    return;
+    return sendScript(res, 'error', error || 'missing code');
   }
 
   try {
@@ -13,22 +12,35 @@ module.exports = async function handler(req, res) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        client_id: process.env.OAUTH_CLIENT_ID,
+        client_id:     process.env.OAUTH_CLIENT_ID,
         client_secret: process.env.OAUTH_CLIENT_SECRET,
-        code: code,
+        code:          code,
       }),
     });
     var data = await tokenRes.json();
     if (data.error) throw new Error(data.error_description || data.error);
-
-    var payload = JSON.stringify({ token: data.access_token, provider: 'github' });
-    var message = 'authorization:github:success:' + payload;
-
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.send('<!DOCTYPE html><html><body>\n<script>\n(function () {\n  var msg = ' + JSON.stringify(message) + ';\n  function receive(e) {\n    window.opener && window.opener.postMessage(msg, e.origin);\n    window.close();\n  }\n  window.addEventListener("message", receive, false);\n  window.opener && window.opener.postMessage("authorizing:github", "*");\n})();\n</script>\n<p>Authorizing&hellip;</p>\n</body></html>');
+    sendScript(res, 'success', data.access_token);
   } catch (err) {
-    var errMsg = JSON.stringify('authorization:github:error:' + (err.message || 'unknown'));
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.send('<!DOCTYPE html><html><body>\n<script>\n(function() {\n  window.opener && window.opener.postMessage(' + errMsg + ', "*");\n  window.close();\n})();\n</script>\n<p>Authentication failed.</p>\n</body></html>');
+    sendScript(res, 'error', err.message || 'unknown error');
   }
 };
+
+function sendScript(res, status, value) {
+  var msg = status === 'success'
+    ? 'authorization:github:success:' + JSON.stringify({ token: value, provider: 'github' })
+    : 'authorization:github:error:'   + JSON.stringify(String(value));
+
+  // Post immediately AND on any ping from the CMS opener (handles both Decap v2/v3)
+  var script = [
+    '(function(){',
+    '  var msg = ' + JSON.stringify(msg) + ';',
+    '  function send(){ window.opener && window.opener.postMessage(msg, "*"); }',
+    '  send();',
+    '  window.addEventListener("message", send, false);',
+    '  setTimeout(function(){ window.close(); }, 2000);',
+    '})();',
+  ].join('\n');
+
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send('<!DOCTYPE html><html><body><script>' + script + '<\/script><p>Authorizing…</p></body></html>');
+}
