@@ -20,6 +20,60 @@ window.PROJECTS = [
   },
 
   {
+    slug: 'cohesive-construction',
+    title: 'Cohesive Construction',
+    year: '2026',
+    category: 'Website',
+    tagline: 'A website redesign for a commercial and industrial construction company, built to improve credibility, project presentation and enquiry pathways.',
+    location: 'South Island, NZ · Commercial & Industrial Construction',
+    link: '/work/cohesive-construction/',
+    thumbPlaceholder: { number: '1', label: 'Homepage snapshot here' },
+    coverPlaceholder: { number: '1', label: 'Homepage snapshot here' },
+    visit: 'https://cohesive.net.nz',
+    gallery: [
+      { placeholder: true, number: '2', label: 'Projects listing snapshot here' },
+      { placeholder: true, number: '3', label: 'Project detail page with metrics and awards here' },
+      { placeholder: true, number: '4', label: 'Capabilities overview snapshot here' },
+      { placeholder: true, number: '5', label: 'Capability detail or construction process page here' },
+      { placeholder: true, number: '6', label: 'Resources or contact pathway snapshot here' }
+    ],
+    facts: [
+      { k: 'Discipline', v: 'Website UX/UI · IA · Figma handover' },
+      { k: 'Sector', v: 'Commercial & Industrial Construction' },
+      { k: 'Role', v: 'UX/UI Designer (agency collaboration)' }
+    ],
+    body: [
+      { h: 'Overview' },
+      { p: 'Cohesive Construction needed a website that better reflected the quality and scale of their work.' },
+      { p: 'The business specialises in commercial and industrial builds, with a focus on premium commercial developments and owner-occupier or investment industrial projects across New Zealand, primarily in the South Island.' },
+      { p: 'The existing website no longer gave the team enough flexibility to manage content in-house, and it did not fully show the calibre of their projects, clients, services or team.' },
+      { p: 'We worked on the UX and UI design in collaboration with an agency based in Christchurch, helping shape the website structure, page templates and visual direction.' },
+      { h: 'What we did' },
+      { list: ['Website UX and UI design', 'Sitemap and information architecture', 'User persona planning', 'Wireframes', 'High-fidelity UI design', 'Developer handover in Figma'] },
+      { h: 'The challenge' },
+      { p: 'For Cohesive, the website was not only about generating enquiries. Many visitors arrive after a referral, after seeing a project in person, or after receiving information through Wide Span Sheds.' },
+      { p: 'Their main goal is to validate credibility.' },
+      { p: 'They want to know if Cohesive is established, experienced, capable of delivering high-end work, and trusted by reputable clients. The site needed to support that decision-making process quickly, without overwhelming smaller owner-occupiers or underwhelming larger commercial investors.' },
+      { h: 'The approach' },
+      { p: 'We structured the website around a practical validation journey: understand who Cohesive is, see proof through completed projects, explore relevant capabilities, download useful information, and get in touch when ready.' },
+      { p: 'This shaped the key page templates, including the homepage, capabilities overview, capability detail pages, project listing, project detail pages, resources and contact pathways.' },
+      { p: 'The design gives more weight to real project imagery, clear service messaging, award recognition, client proof and practical calls to action.' },
+      { h: 'Key UX decisions' },
+      { list: ['Completed work became central to the website, with project pages designed to show visual proof, project details, key metrics, awards and related work.', 'The capabilities section was structured to explain what Cohesive handles across the process, from design and consent through to pricing, project management, safety, risk and delivery.', 'The site needed to work for both owner-occupiers and investors, balancing step-by-step reassurance with proof of scale, ROI, documentation and project experience.', 'Because some visitors arrive through Wide Span Sheds, the site needed a clear pathway to explain the connection and reassure users that Cohesive is the trusted construction partner.', 'Reusable templates for projects, capabilities, locations and resources gave the team a stronger foundation for future updates.'] },
+      { h: 'Visual direction' },
+      { p: 'The visual direction needed to feel confident, practical and established.' },
+      { p: 'We used strong project photography, clear page sections, bold navy and yellow brand moments, and a structured layout system to create a professional construction website without making it feel too corporate or sterile.' },
+      { p: 'The design balances credibility with warmth, using real work and clear content hierarchy rather than relying on generic marketing language.' },
+      { h: 'Outcome' },
+      { p: 'The redesigned website is now live at cohesive.net.nz.' },
+      { p: 'The new site gives Cohesive Construction a clearer, more flexible and more credible digital presence. It better supports commercial and industrial clients, showcases completed work more effectively, and gives visitors clearer pathways to explore capabilities, download resources or contact the team.' },
+      { h: 'Reflection' },
+      { p: 'This project was a good reminder that trust is the main job of many B2B websites.' },
+      { p: 'For Cohesive, the design needed to do more than look modern. It needed to help serious decision-makers understand the business, see proof of delivery and feel confident enough to start a conversation.' }
+    ]
+  },
+
+  {
     slug: 'clearpoint',
     title: 'ClearPoint',
     year: '2025',

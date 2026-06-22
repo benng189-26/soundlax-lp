@@ -168,10 +168,18 @@
   /* ---------- portfolio rendering ---------- */
   function projectHref(p) { return p.link ? p.link : ('/work?p=' + encodeURIComponent(p.slug)); }
 
+  function placeholderInner(ph) {
+    var number = ph && ph.number ? '<span class="ph-number">' + esc(ph.number) + '</span>' : '';
+    var label = ph && ph.label ? esc(ph.label) : 'Website snapshot placeholder';
+    return '<div class="placeholder-inner">' + number + '<span class="ph-label">' + label + '</span></div>';
+  }
+
   function cardHTML(p) {
     var thumb = p.thumb
       ? '<div class="thumb-art"><img src="' + p.thumb + '" alt="' + esc(p.title) + '" loading="lazy"></div>'
-      : '<div class="thumb-art"><div class="mesh"></div></div>';
+      : p.thumbPlaceholder
+        ? '<div class="thumb-art thumb-placeholder" role="img" aria-label="' + esc(p.thumbPlaceholder.label || p.title) + '">' + placeholderInner(p.thumbPlaceholder) + '</div>'
+        : '<div class="thumb-art"><div class="mesh"></div></div>';
     return '' +
       '<a class="work-card reveal" href="' + projectHref(p) + '"' + (p.external ? ' target="_blank" rel="noopener"' : '') + '>' +
         thumb +
@@ -202,6 +210,10 @@
     var root = document.querySelector('[data-work-detail]');
     if (!root) return;
     var slug = new URLSearchParams(location.search).get('p');
+    if (!slug) {
+      var parts = location.pathname.replace(/\/+$/, '').split('/');
+      slug = parts[1] === 'work' && parts[2] ? decodeURIComponent(parts[2]) : '';
+    }
     var p = window.PROJECTS.filter(function (x) { return x.slug === slug; })[0];
     if (!p) { location.replace('/portfolio'); return; }
     document.title = p.title + ' - Bentoji Studio';
@@ -218,16 +230,21 @@
     }).join('');
     var tocHTML = toc.length ? '<nav class="work-toc" aria-label="Sections">' + toc.join('') + '</nav>' : '';
 
-    var shots = (p.gallery || []).map(function (src, i) {
-      return '<figure class="shot"><img src="' + src + '" alt="' + esc(p.title) + ' - screen ' + (i + 1) + '" loading="lazy"></figure>';
+    var shots = (p.gallery || []).map(function (shot, i) {
+      if (typeof shot === 'string') {
+        return '<figure class="shot"><img src="' + shot + '" alt="' + esc(p.title) + ' - screen ' + (i + 1) + '" loading="lazy"></figure>';
+      }
+      return '<figure class="shot shot-placeholder" role="img" aria-label="' + esc((shot && shot.label) || p.title + ' screen placeholder') + '">' + placeholderInner(shot || {}) + '</figure>';
     }).join('');
 
     var coverImg = p.cover || p.thumb;
     var cover = coverImg
       ? '<div class="thumb-art"><img src="' + coverImg + '" alt="' + esc(p.title) + '"></div>'
-      : '<div class="thumb-art"><div class="mesh"></div></div>';
+      : p.coverPlaceholder
+        ? '<div class="thumb-art thumb-placeholder" role="img" aria-label="' + esc(p.coverPlaceholder.label || p.title) + '">' + placeholderInner(p.coverPlaceholder) + '</div>'
+        : '<div class="thumb-art"><div class="mesh"></div></div>';
 
-    var visit = p.visit ? '<div class="hero-actions"><a class="btn btn-light" href="' + p.visit + '">Visit project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>' : '';
+    var visit = p.visit ? '<div class="hero-actions"><a class="btn btn-light" href="' + esc(p.visit) + '" target="_blank" rel="noopener noreferrer">Visit project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>' : '';
 
     root.innerHTML =
       '<div class="container work-detail">' +
