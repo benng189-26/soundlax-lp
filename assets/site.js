@@ -308,8 +308,8 @@
     var ctx = canvas.getContext('2d');
     var W, H, particles, raf;
     var mouse = { x: -9999, y: -9999 };
-    var CONNECT = 130;
-    var REPEL   = 120;
+    var CONNECT = 152;
+    var REPEL   = 185;
     var count;
 
     function Particle() {
@@ -318,10 +318,10 @@
     Particle.prototype.reset = function () {
       this.x  = Math.random() * W;
       this.y  = Math.random() * H;
-      this.vx = (Math.random() - 0.5) * 0.26;
-      this.vy = (Math.random() - 0.5) * 0.26;
-      this.r  = Math.random() * 1.3 + 0.7;
-      this.a  = Math.random() * 0.40 + 0.30;
+      this.vx = (Math.random() - 0.5) * 0.62;
+      this.vy = (Math.random() - 0.5) * 0.62;
+      this.r  = Math.random() * 2.6 + 0.7;
+      this.a  = Math.random() * 0.45 + 0.45;
     };
     Particle.prototype.update = function () {
       var dx = this.x - mouse.x;
@@ -329,15 +329,18 @@
       var d2 = dx * dx + dy * dy;
       if (d2 < REPEL * REPEL && d2 > 0.25) {
         var d = Math.sqrt(d2);
-        var f = (1 - d / REPEL) * 0.6;
-        this.vx += (dx / d) * f * 0.1;
-        this.vy += (dy / d) * f * 0.1;
+        var f = (1 - d / REPEL);
+        this.vx += (dx / d) * f * 0.55;
+        this.vy += (dy / d) * f * 0.55;
       }
-      /* gentle random drift */
-      this.vx += (Math.random() - 0.5) * 0.007;
-      this.vy += (Math.random() - 0.5) * 0.007;
-      this.vx *= 0.984;
-      this.vy *= 0.984;
+      /* lively random drift */
+      this.vx += (Math.random() - 0.5) * 0.018;
+      this.vy += (Math.random() - 0.5) * 0.018;
+      this.vx *= 0.986;
+      this.vy *= 0.986;
+      /* cap top speed so the repel can't fling particles off */
+      var sp = this.vx * this.vx + this.vy * this.vy;
+      if (sp > 9) { var sc = 3 / Math.sqrt(sp); this.vx *= sc; this.vy *= sc; }
       this.x += this.vx;
       this.y += this.vy;
       /* wrap edges */
@@ -354,7 +357,7 @@
       canvas.width  = W * dpr;
       canvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      count = W < 760 ? 44 : 78;
+      count = W < 760 ? 66 : 132;
       particles = [];
       for (var i = 0; i < count; i++) particles.push(new Particle());
     }
@@ -367,14 +370,33 @@
           var dy = particles[i].y - particles[j].y;
           var d2 = dx * dx + dy * dy;
           if (d2 < cc) {
-            var alpha = (1 - Math.sqrt(d2) / CONNECT) * 0.25;
+            var alpha = (1 - Math.sqrt(d2) / CONNECT) * 0.34;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.strokeStyle = 'rgba(255,255,255,' + alpha + ')';
-            ctx.lineWidth = 0.7;
+            ctx.lineWidth = 0.9;
             ctx.stroke();
           }
+        }
+      }
+    }
+
+    function drawMouseLines() {
+      if (mouse.x < -9000) return;
+      var R = REPEL, rr = R * R;
+      for (var i = 0; i < particles.length; i++) {
+        var dx = particles[i].x - mouse.x;
+        var dy = particles[i].y - mouse.y;
+        var d2 = dx * dx + dy * dy;
+        if (d2 < rr) {
+          var a = (1 - Math.sqrt(d2) / R) * 0.6;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = 'rgba(255,255,255,' + a + ')';
+          ctx.lineWidth = 1;
+          ctx.stroke();
         }
       }
     }
@@ -382,6 +404,7 @@
     function drawFrame() {
       ctx.clearRect(0, 0, W, H);
       drawLines();
+      drawMouseLines();
       for (var i = 0; i < particles.length; i++) {
         var p = particles[i];
         p.update();
