@@ -334,13 +334,24 @@
         this.vy += (dy / d) * f * 0.55;
       }
       /* lively random drift */
-      this.vx += (Math.random() - 0.5) * 0.018;
-      this.vy += (Math.random() - 0.5) * 0.018;
-      this.vx *= 0.986;
-      this.vy *= 0.986;
-      /* cap top speed so the repel can't fling particles off */
+      this.vx += (Math.random() - 0.5) * 0.02;
+      this.vy += (Math.random() - 0.5) * 0.02;
+      this.vx *= 0.995;
+      this.vy *= 0.995;
+      /* Keep every particle autonomously moving (not just on hover):
+         clamp speed into [MIN, MAX] every frame. MIN guarantees constant drift. */
       var sp = this.vx * this.vx + this.vy * this.vy;
-      if (sp > 9) { var sc = 3 / Math.sqrt(sp); this.vx *= sc; this.vy *= sc; }
+      var MIN = 0.6, MAX = 2.8;
+      if (sp > MAX * MAX) {
+        var sc = MAX / Math.sqrt(sp); this.vx *= sc; this.vy *= sc;
+      } else if (sp < MIN * MIN) {
+        if (sp < 1e-4) {
+          var ang = Math.random() * 6.2832;
+          this.vx = Math.cos(ang) * MIN; this.vy = Math.sin(ang) * MIN;
+        } else {
+          var su = MIN / Math.sqrt(sp); this.vx *= su; this.vy *= su;
+        }
+      }
       this.x += this.vx;
       this.y += this.vy;
       /* wrap edges */

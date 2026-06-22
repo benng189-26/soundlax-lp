@@ -26,8 +26,20 @@ document.addEventListener('DOMContentLoaded', function () {
       var target = document.querySelector(hash);
       if (!target) return;
       e.preventDefault();
-      if (lenis) lenis.scrollTo(target, { offset: -80, duration: 1.2 });
-      else target.scrollIntoView({ behavior: 'smooth' });
+      // The page uses `scroll-snap-type: y mandatory`, which otherwise hijacks
+      // a programmatic scroll and makes it jump. Turn snapping off for the
+      // duration of the animated scroll, then restore it at a snap point.
+      var root = document.documentElement;
+      var prevSnap = root.style.scrollSnapType;
+      root.style.scrollSnapType = 'none';
+      var restore = function () { root.style.scrollSnapType = prevSnap || ''; };
+      if (lenis) {
+        lenis.scrollTo(target, { offset: 0, duration: 1.2, onComplete: restore });
+        setTimeout(restore, 1600);
+      } else {
+        target.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(restore, 1000);
+      }
     });
   });
 
