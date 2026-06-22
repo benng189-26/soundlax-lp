@@ -108,10 +108,33 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var email = form.querySelector('input[type=email]');
+      var note  = document.getElementById('formNote');
+      var btn   = form.querySelector('button[type=submit]') || form.querySelector('button');
       if (!email.value || email.value.indexOf('@') === -1) { email.focus(); return; }
-      var note = document.getElementById('formNote');
-      if (note) note.hidden = false;
-      form.querySelector('button').textContent = 'Joined';
+
+      var data = Object.fromEntries(new FormData(form).entries());
+      if (data.botcheck) return; // honeypot tripped
+      // record checkbox preferences clearly in the email
+      var upd = form.querySelector('input[name=updates]');
+      var pro = form.querySelector('input[name=promos]');
+      data.updates = upd && upd.checked ? 'Yes' : 'No';
+      data.promos  = pro && pro.checked ? 'Yes' : 'No';
+
+      if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Joining\u2026'; }
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function (r) { return r.json(); }).then(function (res) {
+        if (res.success) {
+          if (note) { note.hidden = false; note.className = 'form-note ok'; note.textContent = "Thanks \u2013 you're on the list."; }
+          form.reset();
+          if (btn) { btn.textContent = 'Joined'; }
+        } else { throw new Error(res.message || 'failed'); }
+      }).catch(function () {
+        if (note) { note.hidden = false; note.className = 'form-note err'; note.textContent = 'Something went wrong. Please email soundlax.studio@gmail.com.'; }
+        if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Join'; }
+      });
     });
   }
 
@@ -320,31 +343,28 @@ document.addEventListener('DOMContentLoaded', function () {
     var dotsEl = document.getElementById('testiDots');
     if (!track || !dotsEl) return;
 
+    // One testimonial per slide: each review is its own fixed-width card.
+    // Adding more reviews to testimonials.json automatically adds more slides + dots.
     var reviews = data.reviews || [];
-    var perPage = data.perPage || 3;
-    var pages = [];
-    for (var i = 0; i < reviews.length; i += perPage) {
-      pages.push(reviews.slice(i, i + perPage));
-    }
 
-    track.innerHTML = pages.map(function (page) {
-      return '<div class="testi-page">' + page.map(function (r) {
-        return '<blockquote class="testi">' +
+    track.innerHTML = reviews.map(function (r) {
+      return '<div class="testi-page">' +
+        '<blockquote class="testi">' +
           '<div class="testi-stars">★★★★★</div>' +
           '<h4 class="testi-title">' + escHtml(r.title) + '</h4>' +
           '<div class="testi-body"><p>' + escHtml(r.body) + '</p></div>' +
           '<button class="testi-more" aria-label="Read more">Read more</button>' +
           '<footer>' +
-          '<span class="name">' + escHtml(r.name) + '</span>' +
-          '<span class="role">' + escHtml(r.date) + ' · ' + escHtml(r.country) + '</span>' +
+            '<span class="name">' + escHtml(r.name) + '</span>' +
+            '<span class="role">' + escHtml(r.date) + ' · ' + escHtml(r.country) + '</span>' +
           '</footer>' +
-          '</blockquote>';
-      }).join('') + '</div>';
+        '</blockquote>' +
+      '</div>';
     }).join('');
 
-    dotsEl.innerHTML = pages.map(function (_, i) {
+    dotsEl.innerHTML = reviews.map(function (_, i) {
       return '<button class="testi-dot' + (i === 0 ? ' active' : '') +
-        '" data-page="' + i + '" aria-label="Page ' + (i + 1) + '"></button>';
+        '" data-page="' + i + '" aria-label="Review ' + (i + 1) + '"></button>';
     }).join('');
 
     initCarousel();

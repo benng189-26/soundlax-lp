@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="/assets/style.css?v=9" />
+<link rel="stylesheet" href="/assets/style.css?v=10" />
 
 <!-- enables JS-only reveal hiding (so content stays visible if JS fails) -->
 <script>document.documentElement.classList.add('js');</script>
@@ -296,6 +296,11 @@
       <h3>Get early updates</h3>
     </header>
     <form class="signup-form" id="signupForm" novalidate>
+      <!-- Web3Forms config -->
+      <input type="hidden" name="access_key" value="f2f9756b-506d-4235-8367-8933a20cbb1e" />
+      <input type="hidden" name="subject" value="New SoundLax early-updates signup" />
+      <input type="hidden" name="from_name" value="SoundLax - Get early updates" />
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
       <label class="field">
         <span class="field-label">Email <em>*</em></span>
         <input type="email" name="email" placeholder="you@email.com" required />
@@ -355,6 +360,6 @@
   </div>
 </footer>
 
-<script src="/assets/main.js?v=9"></script>
+<script src="/assets/main.js?v=10"></script>
 </body>
 </html>

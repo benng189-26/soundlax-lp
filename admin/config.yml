@@ -8,21 +8,17 @@ backend:
 media_folder: "assets/img"
 public_folder: "/assets/img"
 
-# ─────────────────────────────────────────────────
-# SoundLax page
-# ─────────────────────────────────────────────────
 collections:
+  # ─────────────────────────────────────────────────
+  # SoundLax page
+  # ─────────────────────────────────────────────────
   - name: soundlax_reviews
-    label: "App Store Reviews"
+    label: "SoundLax · App Store Reviews"
     files:
       - name: reviews
         label: "Reviews"
         file: "content/testimonials.json"
         fields:
-          - name: perPage
-            label: "Reviews per page"
-            widget: number
-            default: 3
           - name: reviews
             label: "Reviews"
             widget: list
@@ -34,7 +30,7 @@ collections:
               - {label: "Review Body", name: body, widget: text}
 
   - name: soundlax_faq
-    label: "SoundLax FAQ"
+    label: "SoundLax · FAQ"
     files:
       - name: faq
         label: "FAQ Items"
@@ -50,9 +46,9 @@ collections:
                 widget: text
                 hint: "HTML is supported. Use <p>paragraphs</p> and <ul><li>lists</li></ul>."
 
-# ─────────────────────────────────────────────────
-# Homepage
-# ─────────────────────────────────────────────────
+  # ─────────────────────────────────────────────────
+  # Homepage
+  # ─────────────────────────────────────────────────
   - name: homepage
     label: "Homepage"
     files:
@@ -61,7 +57,7 @@ collections:
         file: "content/homepage.json"
         fields:
           - name: hero
-            label: "Hero Section"
+            label: "Hero"
             widget: object
             fields:
               - {label: "Headline", name: title, widget: string}
@@ -76,9 +72,103 @@ collections:
                 label: "Paragraphs"
                 widget: list
                 field: {label: "Paragraph", name: paragraph, widget: text}
+          - name: services
+            label: "What We Do (Services)"
+            widget: object
+            fields:
+              - {label: "Eyebrow Label", name: eyebrow, widget: string}
+              - {label: "Heading", name: heading, widget: string}
+              - name: items
+                label: "Service Cards"
+                label_singular: "Service"
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - {label: "Title", name: title, widget: string}
+                  - {label: "Tagline", name: tagline, widget: text}
+                  - name: paragraphs
+                    label: "Paragraphs"
+                    widget: list
+                    field: {label: "Paragraph", name: paragraph, widget: text}
+                  - {label: "List Label", name: listLabel, widget: string, required: false}
+                  - name: list
+                    label: "List Items"
+                    widget: list
+                    required: false
+                    field: {label: "Item", name: item, widget: string}
+                  - {label: "Link Text", name: linkText, widget: string, required: false}
+          - name: why
+            label: "What You Can Expect"
+            widget: object
+            fields:
+              - {label: "Eyebrow Label", name: eyebrow, widget: string}
+              - {label: "Heading", name: heading, widget: string}
+              - name: items
+                label: "Points"
+                label_singular: "Point"
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - {label: "Title", name: title, widget: string}
+                  - {label: "Body", name: body, widget: text}
+          - name: process
+            label: "How Projects Usually Work"
+            widget: object
+            fields:
+              - {label: "Eyebrow Label", name: eyebrow, widget: string}
+              - {label: "Heading", name: heading, widget: string}
+              - name: items
+                label: "Steps"
+                label_singular: "Step"
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - {label: "Title", name: title, widget: string}
+                  - {label: "Body", name: body, widget: text}
+          - name: work
+            label: "Selected Work (Heading)"
+            widget: object
+            fields:
+              - {label: "Eyebrow Label", name: eyebrow, widget: string}
+              - {label: "Heading", name: heading, widget: text}
           - name: cta
-            label: "CTA Section"
+            label: "Call To Action"
             widget: object
             fields:
               - {label: "Heading", name: heading, widget: string}
               - {label: "Body", name: body, widget: text}
+          - name: footer
+            label: "Footer"
+            widget: object
+            fields:
+              - {label: "Studio Blurb", name: blurb, widget: text}
+
+  # ─────────────────────────────────────────────────
+  # Contact page
+  # ─────────────────────────────────────────────────
+  - name: contact
+    label: "Contact Page"
+    files:
+      - name: content
+        label: "Contact Content"
+        file: "content/contact.json"
+        fields:
+          - name: hero
+            label: "Hero"
+            widget: object
+            fields:
+              - {label: "Heading", name: title, widget: string}
+              - {label: "Lead Paragraph", name: lead, widget: text}
+          - name: details
+            label: "Contact Details"
+            widget: object
+            fields:
+              - {label: "Email (display text)", name: email, widget: string}
+              - {label: "Studio / Location", name: studio, widget: string}
+              - {label: "What We Take On", name: takeOn, widget: text}
+              - {label: "Response Time", name: response, widget: string}
+          - name: footer
+            label: "Footer"
+            widget: object
+            fields:
+              - {label: "Studio Blurb", name: blurb, widget: text}

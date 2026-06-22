@@ -67,34 +67,87 @@
       reveals.forEach(function (el) { el.classList.add('in'); });
     }
 
-    /* ---- CMS homepage content ---- */
+    /* ---- CMS-driven content (homepage / contact) ----
+       Text nodes use data-cms="dotted.path". Repeatable sections
+       (services / why / process) are rendered from arrays, replacing the
+       hard-coded HTML fallback only once the JSON loads successfully. ---- */
     if (document.querySelector('[data-cms]')) {
       function escCms(s) {
         return String(s == null ? '' : s)
           .replace(/&/g, '&amp;').replace(/</g, '&lt;')
           .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       }
-      fetch('/content/homepage.json')
+      function dig(obj, path) {
+        return path.split('.').reduce(function (o, k) { return (o == null) ? o : o[k]; }, obj);
+      }
+      function pad(n) { return (n < 10 ? '0' : '') + n; }
+      function reobserve(scope) {
+        var nodes = scope.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+          var o = new IntersectionObserver(function (en) {
+            en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); } });
+          }, { threshold: 0.12 });
+          nodes.forEach(function (el) { o.observe(el); });
+        } else {
+          nodes.forEach(function (el) { el.classList.add('in'); });
+        }
+      }
+      var arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+      function renderServices(items) {
+        var grid = document.querySelector('[data-svc-grid]');
+        if (!grid || !items || !items.length) return;
+        grid.innerHTML = items.map(function (it, i) {
+          var paras = (it.paragraphs || []).map(function (x) { return '<p>' + escCms(x) + '</p>'; }).join('');
+          var list  = (it.list || []).map(function (li) { return '<li>' + escCms(li) + '</li>'; }).join('');
+          return '<div class="svc-exp reveal' + (i % 2 ? ' d2' : '') + '">' +
+            '<span class="num">' + pad(i + 1) + '</span>' +
+            '<h4>' + escCms(it.title) + '</h4>' +
+            (it.tagline ? '<p class="svc-tagline">' + escCms(it.tagline) + '</p>' : '') +
+            paras +
+            (it.listLabel ? '<p class="svc-list-label">' + escCms(it.listLabel) + '</p>' : '') +
+            (list ? '<ul>' + list + '</ul>' : '') +
+            (it.linkText ? '<a class="svc-link" href="/contact">' + escCms(it.linkText) + ' ' + arrow + '</a>' : '') +
+          '</div>';
+        }).join('');
+        reobserve(grid);
+      }
+      function renderWhy(items) {
+        var grid = document.querySelector('[data-why-grid]');
+        if (!grid || !items || !items.length) return;
+        grid.innerHTML = items.map(function (it, i) {
+          return '<div class="why-item reveal' + (i % 2 ? ' d2' : '') + '">' +
+            '<h4>' + escCms(it.title) + '</h4><p>' + escCms(it.body) + '</p></div>';
+        }).join('');
+        reobserve(grid);
+      }
+      function renderProcess(items) {
+        var grid = document.querySelector('[data-process-grid]');
+        if (!grid || !items || !items.length) return;
+        grid.innerHTML = items.map(function (it, i) {
+          return '<div class="process-step reveal' + (i % 2 ? ' d2' : '') + '">' +
+            '<span class="step-num">' + pad(i + 1) + '</span>' +
+            '<h4>' + escCms(it.title) + '</h4><p>' + escCms(it.body) + '</p></div>';
+        }).join('');
+        reobserve(grid);
+      }
+
+      var cmsSrc = document.body.getAttribute('data-content') || '/content/homepage.json';
+      fetch(cmsSrc)
         .then(function (r) { return r.json(); })
         .then(function (d) {
           document.querySelectorAll('[data-cms]').forEach(function (el) {
-            var key = el.getAttribute('data-cms');
-            var val;
-            if      (key === 'hero-title')    val = d.hero && d.hero.title;
-            else if (key === 'hero-lead')     val = d.hero && d.hero.lead;
-            else if (key === 'about-eyebrow') val = d.about && d.about.eyebrow;
-            else if (key === 'about-heading') val = d.about && d.about.heading;
-            else if (key === 'about-body') {
-              var paras = d.about && d.about.paragraphs;
-              if (paras && paras.length) {
-                el.innerHTML = paras.map(function (p) { return '<p>' + escCms(p) + '</p>'; }).join('');
-              }
-              return;
+            var val = dig(d, el.getAttribute('data-cms'));
+            if (val == null) return;
+            if (Array.isArray(val)) {
+              el.innerHTML = val.map(function (x) { return '<p>' + escCms(x) + '</p>'; }).join('');
+            } else {
+              el.textContent = val;
             }
-            else if (key === 'cta-heading') val = d.cta && d.cta.heading;
-            else if (key === 'cta-body')    val = d.cta && d.cta.body;
-            if (val != null) el.textContent = val;
           });
+          if (d.services) renderServices(d.services.items);
+          if (d.why)      renderWhy(d.why.items);
+          if (d.process)  renderProcess(d.process.items);
         })
         .catch(function () {});
     }

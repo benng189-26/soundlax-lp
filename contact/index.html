@@ -10,10 +10,10 @@
 <meta property="og:image" content="https://bentoji.co.nz/assets/img/app-icon.png" />
 <link rel="icon" href="/assets/img/app-icon.png" sizes="any" />
 <script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="/assets/site.css?v=11" />
+<link rel="stylesheet" href="/assets/site.css?v=12" />
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 </head>
-<body>
+<body data-content="/content/contact.json">
 
 <header class="site-nav">
   <div class="container nav-inner">
@@ -40,8 +40,8 @@
   <div class="aurora" aria-hidden="true"><span class="blob b2"></span><span class="blob b3"></span></div>
   <div class="grain" aria-hidden="true"></div>
   <div class="container">
-    <h1 class="display reveal d1">Let's talk.</h1>
-    <p class="lead reveal d2" style="color:var(--muted);max-width:50ch">Tell us a little about your project, timeline, and what you're hoping to make. We read every message.</p>
+    <h1 class="display reveal d1" data-cms="hero.title">Let's talk.</h1>
+    <p class="lead reveal d2" style="color:var(--muted);max-width:50ch" data-cms="hero.lead">Tell us a little about your project, timeline, and what you're hoping to make. We read every message.</p>
   </div>
 </section>
 
@@ -86,19 +86,19 @@
         <div class="contact-list">
           <div>
             <div class="k">Email</div>
-            <a href="mailto:soundlax.studio@gmail.com">soundlax.studio@gmail.com</a>
+            <a href="mailto:soundlax.studio@gmail.com" data-cms="details.email">soundlax.studio@gmail.com</a>
           </div>
           <div>
             <div class="k">Studio</div>
-            <div>Aotearoa New Zealand · working worldwide</div>
+            <div data-cms="details.studio">Aotearoa New Zealand · working worldwide</div>
           </div>
           <div>
             <div class="k">What we take on</div>
-            <div class="muted">Product &amp; app design, brand &amp; identity, web design &amp; build, motion &amp; illustration.</div>
+            <div class="muted" data-cms="details.takeOn">Product &amp; app design, brand &amp; identity, web design &amp; build, motion &amp; illustration.</div>
           </div>
           <div>
             <div class="k">Response time</div>
-            <div class="muted">Usually within 1–2 business days.</div>
+            <div class="muted" data-cms="details.response">Usually within 1–2 business days.</div>
           </div>
         </div>
       </div>
@@ -111,7 +111,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <a class="brand" href="/"><span class="spark">✦</span> bentoji</a>
-        <p>An independent design &amp; product studio making calm, useful, beautifully crafted digital things.</p>
+        <p data-cms="footer.blurb">An independent design &amp; product studio making calm, useful, beautifully crafted digital things.</p>
       </div>
       <div class="footer-col">
         <h5>Explore</h5>
@@ -133,6 +133,6 @@
   </div>
 </footer>
 
-<script src="/assets/site.js?v=12"></script>
+<script src="/assets/site.js?v=13"></script>
 </body>
 </html>
