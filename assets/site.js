@@ -185,6 +185,12 @@
     }).join('');
   }
 
+  function classTokens(value) {
+    return String(value || '').split(/\s+/).filter(function (token) {
+      return /^[a-z0-9_-]+$/i.test(token);
+    }).join(' ');
+  }
+
   function shotHTML(shot, i, title, extraClass) {
     var cls = 'shot' + (extraClass ? ' ' + extraClass : '');
     if (typeof shot === 'string') {
@@ -197,8 +203,9 @@
   }
 
   function cardHTML(p) {
+    var thumbClass = classTokens(p.thumbClass);
     var thumb = p.thumb
-      ? '<div class="thumb-art"><img src="' + p.thumb + '" alt="' + esc(p.title) + '" loading="lazy"></div>'
+      ? '<div class="thumb-art' + (thumbClass ? ' ' + thumbClass : '') + '"><img src="' + p.thumb + '" alt="' + esc(p.title) + '" loading="lazy"></div>'
       : p.thumbPlaceholder
         ? '<div class="thumb-art thumb-placeholder" role="img" aria-label="' + esc(p.thumbPlaceholder.label || p.title) + '">' + placeholderInner(p.thumbPlaceholder) + '</div>'
         : '<div class="thumb-art"><div class="mesh"></div></div>';
@@ -258,8 +265,9 @@
     }).join('');
 
     var coverImg = p.cover || p.thumb;
+    var coverClass = classTokens(p.coverClass);
     var cover = coverImg
-      ? '<div class="thumb-art"><img src="' + coverImg + '" alt="' + esc(p.title) + '"></div>'
+      ? '<div class="thumb-art' + (coverClass ? ' ' + coverClass : '') + '"><img src="' + coverImg + '" alt="' + esc(p.title) + '"></div>'
       : p.coverPlaceholder
         ? '<div class="thumb-art thumb-placeholder" role="img" aria-label="' + esc(p.coverPlaceholder.label || p.title) + '">' + placeholderInner(p.coverPlaceholder) + '</div>'
         : '<div class="thumb-art"><div class="mesh"></div></div>';

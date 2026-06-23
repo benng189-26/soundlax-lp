@@ -28,7 +28,9 @@ window.PROJECTS = [
     location: 'South Island, NZ · Commercial & Industrial Construction',
     link: '/work/cohesive-construction/',
     thumb: '/assets/img/work/cohesive-construction-01.jpg',
+    thumbClass: 'thumb-top',
     cover: '/assets/img/work/cohesive-construction-01.jpg',
+    coverClass: 'cover-full',
     visit: 'https://cohesive.net.nz',
     facts: [
       { k: 'Discipline', v: 'Website UX/UI · IA · Figma handover' },
