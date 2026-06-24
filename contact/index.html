@@ -10,11 +10,38 @@
 <meta property="og:image" content="https://bentoji.co.nz/assets/img/app-icon.png" />
 <link rel="icon" href="/assets/img/app-icon.png" sizes="any" />
 <script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="/assets/site.css?v=28" />
+<link rel="stylesheet" href="/assets/site.css?v=29" />
+<link rel="stylesheet" href="/assets/style.css?v=16" />
+<style>
+  .soundlax-contact .site-nav{display:none;}
+  .soundlax-contact .mobile-menu{display:none;}
+  .soundlax-contact .soundlax-header{display:block !important;}
+</style>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 </head>
 <body data-content="/content/contact.json">
 
+<header class="site-header soundlax-header" id="soundlax-contact-header" style="display:none;">
+  <div class="container header-inner">
+    <span class="brand" aria-label="SoundLax" style="cursor:default;pointer-events:none;">
+      <img src="/assets/img/logo.svg" alt="SoundLax" height="26" />
+    </span>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="/soundlax/privacypolicy">Privacy Policy</a>
+      <a class="btn btn-ghost" href="/contact?app=soundlax" style="padding:10px 22px;font-size:.8125rem;letter-spacing:.06em;">Let's talk</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggleSL" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="slideout" id="slideoutSL" aria-hidden="true">
+  <button class="slideout-close" id="slideoutSLClose" aria-label="Close menu">&times;</button>
+  <nav class="slideout-nav">
+    <a href="/soundlax/privacypolicy">Privacy Policy</a>
+    <a class="btn btn-light" href="/contact?app=soundlax">Let's talk</a>
+  </nav>
+</div>
 <header class="site-nav">
   <div class="container nav-inner">
     <a class="brand" href="/" aria-label="Bentoji home"><img src="/assets/img/bentoji-logo.svg" alt="Bentoji" /></a>
@@ -134,5 +161,26 @@
 </footer>
 
 <script src="/assets/site.js?v=21"></script>
+<script>
+(function(){
+  if(new URLSearchParams(window.location.search).get("app")==="soundlax"){
+    document.body.classList.add("soundlax-contact");
+    var slHeader = document.getElementById("soundlax-contact-header");
+    if(slHeader) slHeader.style.display="";
+    // Mobile menu toggle for SoundLax header
+    var tog = document.getElementById("menuToggleSL");
+    var sl = document.getElementById("slideoutSL");
+    var cl = document.getElementById("slideoutSLClose");
+    if(tog && sl){
+      tog.addEventListener("click", function(){
+        sl.classList.add("open"); sl.setAttribute("aria-hidden","false"); tog.setAttribute("aria-expanded","true");
+      });
+      if(cl) cl.addEventListener("click", function(){
+        sl.classList.remove("open"); sl.setAttribute("aria-hidden","true"); tog.setAttribute("aria-expanded","false");
+      });
+    }
+  }
+})();
+</script>
 </body>
 </html>
