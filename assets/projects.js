@@ -80,6 +80,8 @@ window.PROJECTS = [
     tagline: 'A technology consultancy website redesign focused on AI-powered, human-centred digital experiences.',
     location: 'Auckland, NZ · Tech & Innovation Consultancy',
     thumb: '/assets/img/work/clearpoint.jpg',
+    cover: '/assets/img/work/clearpoint.jpg',
+    coverClass: 'cover-full',
     gallery: ['/assets/img/work/clearpoint-3.jpg', '/assets/img/work/clearpoint-5.jpg', '/assets/img/work/clearpoint-9.jpg', '/assets/img/work/clearpoint-10.jpg', '/assets/img/work/clearpoint-11.jpg'],
     facts: [
       { k: 'Discipline', v: 'Website redesign · UI/UX' },
@@ -105,6 +107,8 @@ window.PROJECTS = [
     tagline: 'A platform for commercial landlords, property managers, and tenants - streamlining lease, maintenance, compliance, and accounting with automation and AI-powered workflows.',
     location: 'NZ & Global · Commercial Property Management Software',
     thumb: '/assets/img/work/re-leased.jpg',
+    cover: '/assets/img/work/re-leased.jpg',
+    coverClass: 'cover-full',
     gallery: ['/assets/img/work/re-leased-2.jpg', '/assets/img/work/re-leased-8.jpg', '/assets/img/work/re-leased-9.jpg', '/assets/img/work/re-leased-11.jpg', '/assets/img/work/re-leased-12.jpg'],
     facts: [
       { k: 'Discipline', v: 'Website · UI/UX' },
@@ -127,6 +131,8 @@ window.PROJECTS = [
     tagline: 'A customer portal for a finance platform - simplifying complex loan workflows, document management, and multi-user access.',
     location: 'New Zealand · Finance',
     thumb: '/assets/img/work/lannock.jpg',
+    cover: '/assets/img/work/lannock.jpg',
+    coverClass: 'cover-full',
     gallery: ['/assets/img/work/lannock-2.jpg', '/assets/img/work/lannock-3.jpg', '/assets/img/work/lannock-4.jpg', '/assets/img/work/lannock-5.jpg', '/assets/img/work/lannock-6.jpg', '/assets/img/work/lannock-7.jpg'],
     facts: [
       { k: 'Discipline', v: 'Product design · IA & workflows' },
@@ -156,6 +162,8 @@ window.PROJECTS = [
     tagline: 'A website presenting speakers, ideas, and event information in a clear, engaging format - celebrating bold ideas from Aotearoa.',
     location: 'Auckland, NZ · Independent TED event',
     thumb: '/assets/img/work/tedxauckland.jpg',
+    cover: '/assets/img/work/tedxauckland.jpg',
+    coverClass: 'cover-full',
     gallery: ['/assets/img/work/tedxauckland-1.jpg', '/assets/img/work/tedxauckland-3.jpg', '/assets/img/work/tedxauckland-4.jpg', '/assets/img/work/tedxauckland-5.jpg', '/assets/img/work/tedxauckland-6.jpg'],
     facts: [
       { k: 'Discipline', v: 'Website · UI/UX' },
@@ -180,6 +188,8 @@ window.PROJECTS = [
     tagline: 'A ground-up marketing site redesign for a cloud collaboration platform for film & TV production (formerly Moxion).',
     location: 'NZ & Global · Film & TV Production',
     thumb: '/assets/img/work/autodesk-flow-capture.jpg',
+    cover: '/assets/img/work/autodesk-flow-capture.jpg',
+    coverClass: 'cover-full',
     gallery: ['/assets/img/work/autodesk-flow-capture-3.jpg', '/assets/img/work/autodesk-flow-capture-5.jpg', '/assets/img/work/autodesk-flow-capture-6.jpg', '/assets/img/work/autodesk-flow-capture-8.jpg', '/assets/img/work/autodesk-flow-capture-9.jpg'],
     facts: [
       { k: 'Discipline', v: 'Website · UI/UX' },
@@ -204,6 +214,8 @@ window.PROJECTS = [
     tagline: 'A website redesign repositioning solar roofing as a premium offering - improving clarity, trust, and conversion for high-value decisions.',
     location: 'Hawaii, US · Roofing & Solar',
     thumb: '/assets/img/work/kapili.jpg',
+    cover: '/assets/img/work/kapili.jpg',
+    coverClass: 'cover-full',
     gallery: ['/assets/img/work/kapili-2.jpg', '/assets/img/work/kapili-4.jpg', '/assets/img/work/kapili-9.jpg', '/assets/img/work/kapili-11.jpg', '/assets/img/work/kapili-13.jpg'],
     facts: [
       { k: 'Discipline', v: 'Website · UI/UX' },

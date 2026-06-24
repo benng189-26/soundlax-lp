@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="/assets/style.css?v=14" />
+<link rel="stylesheet" href="/assets/style.css?v=15" />
 
 <!-- enables JS-only reveal hiding (so content stays visible if JS fails) -->
 <script>document.documentElement.classList.add('js');</script>
@@ -38,15 +38,12 @@
 <!-- ===================== HEADER ===================== -->
 <header class="site-header" id="top">
   <div class="container header-inner">
-    <a class="brand" href="/" aria-label="bentoji.co.nz">
+    <span class="brand" aria-label="SoundLax">
       <img src="/assets/img/logo.svg" alt="SoundLax" height="26" />
-    </a>
+    </span>
     <nav class="main-nav" aria-label="Primary">
-      <a href="/portfolio">Work</a>
-      <a href="/soundlax-app" class="is-current">SoundLax</a>
-      <a href="/writing">Writing</a>
       <a href="/soundlax/privacypolicy">Privacy Policy</a>
-      <a href="/contact">Contact</a>
+      <a class="btn btn-ghost nav-cta" href="/contact">Let's talk</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -58,11 +55,8 @@
 <div class="slideout" id="slideout" aria-hidden="true">
   <button class="slideout-close" id="slideoutClose" aria-label="Close menu">&times;</button>
   <nav class="slideout-nav">
-    <a href="/portfolio">Work</a>
-    <a href="/soundlax-app">SoundLax</a>
-    <a href="/writing">Writing</a>
     <a href="/soundlax/privacypolicy">Privacy Policy</a>
-    <a href="/contact">Contact</a>
+    <a class="btn btn-light" href="/contact">Let's talk</a>
   </nav>
 </div>
 

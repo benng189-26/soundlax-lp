@@ -173,15 +173,15 @@ html.js .reveal.in{opacity:1;transform:none;}
 .meet-volume-track::before{content:"";position:absolute;left:0;right:0;top:50%;z-index:1;height:5px;border-radius:999px;background:rgba(255,255,255,.96);transform:translateY(-50%);}
 .meet-volume-fill{position:absolute;left:0;top:50%;z-index:2;width:35%;height:5px;border-radius:999px;background:#ff6845;transform:translateY(-50%);animation:volumeFillSweep 4.8s var(--ease) infinite;}
 .meet-volume-knob{position:absolute;left:35%;top:50%;z-index:3;width:clamp(12px,8%,18px);aspect-ratio:1;border-radius:50%;background:var(--white);box-shadow:0 8px 18px rgba(0,0,0,.25);transform:translate(-50%,-50%);animation:volumeKnobSweep 4.8s var(--ease) infinite;}
-.meet-level-bars{position:absolute;left:69.55%;top:22.6%;width:2.35%;height:2.75%;z-index:3;display:flex;align-items:center;justify-content:center;gap:2px;pointer-events:none;}
-.meet-level-bars span{display:block;width:2px;height:68%;border-radius:999px;background:#ff6845;box-shadow:0 0 10px rgba(255,104,69,.35);transform-origin:50% 50%;animation:levelBarPulse 1.18s ease-in-out infinite;}
+.meet-level-bars{position:absolute;left:68.4%;top:23.0%;width:2.5%;height:2.9%;z-index:3;display:flex;align-items:center;justify-content:center;gap:2px;pointer-events:none;}
+.meet-level-bars span{display:block;width:2.5px;height:68%;border-radius:999px;background:#ff6845;box-shadow:0 0 10px rgba(255,104,69,.35);transform-origin:50% 50%;animation:levelBarPulse 1.18s ease-in-out infinite;}
 .meet-level-bars span:nth-child(1){height:48%;animation-delay:-.18s;}
 .meet-level-bars span:nth-child(2){height:82%;animation-delay:-.36s;}
 .meet-level-bars span:nth-child(3){height:100%;animation-delay:-.08s;}
 .meet-level-bars span:nth-child(4){height:58%;animation-delay:-.28s;}
-@keyframes volumeFillSweep{0%,100%{width:35%;}48%{width:52%;}70%{width:42%;}}
-@keyframes volumeKnobSweep{0%,100%{left:35%;}48%{left:52%;}70%{left:42%;}}
-@keyframes levelBarPulse{0%,100%{transform:scaleY(.5);opacity:.72;}38%{transform:scaleY(1.16);opacity:1;}68%{transform:scaleY(.78);opacity:.86;}}
+@keyframes volumeFillSweep{0%,6%{width:35%;}40%{width:57%;}57%,63%{width:44%;}92%,100%{width:35%;}}
+@keyframes volumeKnobSweep{0%,6%{left:35%;}40%{left:57%;}57%,63%{left:44%;}92%,100%{left:35%;}}
+@keyframes levelBarPulse{0%,100%{transform:scaleY(.42);opacity:.6;}22%{transform:scaleY(1.2);opacity:1;}55%{transform:scaleY(.7);opacity:.82;}78%{transform:scaleY(1.05);opacity:.94;}}
 
 /* different */
 .different .eyebrow{letter-spacing:.18em;}
