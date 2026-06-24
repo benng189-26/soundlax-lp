@@ -223,7 +223,8 @@
   function renderWorkGrid() {
     document.querySelectorAll('[data-work-grid]').forEach(function (grid) {
       var limit = parseInt(grid.getAttribute('data-limit') || '0', 10);
-      var list = limit ? window.PROJECTS.slice(0, limit) : window.PROJECTS;
+      var visibleProjects = window.PROJECTS.filter(function (project) { return !project.hidden; });
+      var list = limit ? visibleProjects.slice(0, limit) : visibleProjects;
       grid.innerHTML = list.map(cardHTML).join('');
       // re-observe new reveal nodes
       if ('IntersectionObserver' in window) {

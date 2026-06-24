@@ -101,6 +101,7 @@ window.PROJECTS = [
 
   {
     slug: 're-leased',
+    hidden: true,
     title: 'Re-Leased',
     year: '2025',
     category: 'Website',
@@ -125,6 +126,7 @@ window.PROJECTS = [
 
   {
     slug: 'lannock',
+    hidden: true,
     title: 'Lannock / Strata Finance',
     year: '2025',
     category: 'Customer Portal',
