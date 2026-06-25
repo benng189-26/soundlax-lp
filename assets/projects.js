@@ -9,20 +9,21 @@
    =================================================================== */
 window.PROJECTS = [
   {
+  {
     slug: 'soundlax',
     title: 'SoundLax',
     year: '2026',
     category: 'Product & App Design',
     tagline: 'An ambient sound app for focus, rest, and sleep. Designed to ask less of your attention.',
     location: 'New Zealand · Productivity & Wellbeing',
-    thumb: '/assets/img/work/soundlax-01.jpg',
-    cover: '/assets/img/work/soundlax-01.jpg',
+    thumb: '/assets/img/work/soundlax-thumb.jpg',
+    cover: '/assets/img/work/soundlax-thumb.jpg',
     coverClass: 'cover-full',
     gallery: [
-      '/assets/img/work/soundlax-02.jpg',
-      '/assets/img/work/soundlax-04.jpg',
-      '/assets/img/work/soundlax-05.jpg',
-      '/assets/img/work/soundlax-07.jpg'
+      '/assets/img/work/soundlax-01.png',
+      '/assets/img/work/soundlax-04.png',
+      '/assets/img/work/soundlax-08.png',
+      '/assets/img/work/soundlax-09.png'
     ],
     facts: [
       { k: 'Discipline', v: 'Product design, UX research, UI design, brand identity' },
@@ -36,12 +37,13 @@ window.PROJECTS = [
       { p: 'The project started from a personal frustration. While there are many sound and meditation apps available, I found most of them increasingly complex, packed with features that often distracted from the core task of simply finding a reliable background sound and getting into a focused state.' },
       { p: 'I saw an opportunity to create a more intentional experience, one that reduced friction, simplified decision-making, and prioritised the moments users actually care about.' },
       { p: 'As the sole designer and product owner, I led the project from concept through to launch on the App Store.' },
-      { image: { src: '/assets/img/work/soundlax-01.jpg', alt: 'Image 1' } },
+      { image: { src: '/assets/img/work/soundlax-01.png', alt: 'SoundLax app overview' } },
       { h: 'The Challenge' },
       { p: 'The audio wellness category is highly saturated.' },
       { p: 'Many established competitors offer extensive libraries, meditation programmes, sleep coaching, social features, and personalised recommendations.' },
       { p: 'While powerful, these experiences often introduce complexity that can become a barrier for users seeking immediate focus or relaxation.' },
       { p: 'The challenge: how might we create a simpler audio experience that helps users quickly enter a focused or relaxed state without overwhelming them with choices?' },
+      { image: { src: '/assets/img/work/soundlax-02.png', alt: 'Research and discovery' } },
       { h: 'Research & Discovery' },
       { p: 'I began by reviewing competitor products and identifying recurring patterns across the category.' },
       { p: 'Several themes emerged:' },
@@ -54,7 +56,6 @@ window.PROJECTS = [
       { p: 'I also reflected on my own behaviour and spoke with users who regularly use background audio while working.' },
       { p: '"I just want to open the app, start a sound, and get on with my work, not browsing content in there."' },
       { p: 'This insight became the foundation of the product.' },
-      { image: { src: '/assets/img/work/soundlax-02.jpg', alt: 'Image 2' } },
       { h: 'Design Principles' },
       { p: 'The product was guided by four core principles:' },
       { list: [
@@ -63,7 +64,7 @@ window.PROJECTS = [
         'Minimise cognitive load. Avoid unnecessary decisions and interface clutter.',
         'Create calm. Visual design should support the emotional state users are trying to achieve.'
       ]},
-      { image: { src: '/assets/img/work/soundlax-03.jpg', alt: 'Image 3' } },
+      { image: { src: '/assets/img/work/soundlax-03.png', alt: 'Design principles' } },
       { h: 'Solution' },
       { p: 'The final experience focused on a streamlined audio workflow.' },
       { p: 'Key features:' },
@@ -77,19 +78,26 @@ window.PROJECTS = [
         'Persistent playback controls'
       ]},
       { p: 'Instead of competing on library size, the product focused on accessibility and ease of use.' },
-      { image: { src: '/assets/img/work/soundlax-04.jpg', alt: 'Image 4' } },
+      { image: { src: '/assets/img/work/soundlax-04.png', alt: 'SoundLax solution screens' } },
       { h: 'Design Decisions' },
       { h: 'Persistent Playback Bar' },
       { p: 'One recurring issue observed in competitor products was losing playback controls while navigating.' },
       { p: 'To solve this, a persistent now-playing bar remains visible throughout the experience, allowing users to quickly adjust sounds without disrupting their workflow.' },
-      { image: { src: '/assets/img/work/soundlax-05.jpg', alt: 'Image 5' } },
+      { image: { src: '/assets/img/work/soundlax-05.png', alt: 'Persistent playback bar' } },
       { h: 'Progressive Disclosure' },
       { p: 'Advanced controls are available when needed but remain hidden during normal use.' },
       { p: 'This helped keep the interface approachable for new users while still supporting power users.' },
-      { image: { src: '/assets/img/work/soundlax-06.jpg', alt: 'Image 6' } },
+      { image: { src: '/assets/img/work/soundlax-06.png', alt: 'Progressive disclosure' } },
       { h: 'Content Curation Over Quantity' },
       { p: 'Rather than presenting hundreds of options, content was intentionally curated.' },
       { p: 'This reduced decision fatigue and helped users get started faster.' },
+      { image: { src: '/assets/img/work/soundlax-07.png', alt: 'Content curation' } },
+      { h: 'Bird System and Visual Identity' },
+      { p: 'SoundLax uses a bird illustration system to give the app a more distinctive and personal identity.' },
+      { p: 'The direction was inspired by New Zealand's everyday birdsong, from gardens to forests, and the natural link between birds, ambient sound, and calm environments.' },
+      { p: 'Visually, the system blends vintage bird painting references with a modern treatment: bold colours, soft gradients, grainy textures, and simplified forms. This helped SoundLax stand apart from the flat blue and purple illustration styles often seen in similar apps.' },
+      { p: 'The colour and gradient system was carefully defined to reflect each sound category, while accessibility testing helped ensure text, controls, and layered elements remained clear and easy to read.' },
+      { image: { src: '/assets/img/work/soundlax-08.png', alt: 'Bird system and visual identity' } },
       { h: 'Outcomes' },
       { p: 'The project successfully launched on the Apple App Store and provided an opportunity to validate assumptions with real users.' },
       { p: 'Post-launch feedback highlighted:' },
@@ -100,7 +108,7 @@ window.PROJECTS = [
         'Feedback around audio balancing and sound quality, leading to further iterations.'
       ]},
       { p: 'The launch also provided valuable experience across the full product lifecycle, from concept and design through to release, user feedback, and ongoing improvement.' },
-      { image: { src: '/assets/img/work/soundlax-07.jpg', alt: 'Image 7' } },
+      { image: { src: '/assets/img/work/soundlax-09.png', alt: 'SoundLax outcomes' } },
       { h: 'Key Learnings' },
       { list: [
         'Simplicity is often harder than adding features.',
@@ -115,7 +123,6 @@ window.PROJECTS = [
     ]
   },
 
-  {
     slug: 'cohesive-construction',
     title: 'Cohesive Construction',
     year: '2026',
