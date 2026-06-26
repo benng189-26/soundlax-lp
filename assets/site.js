@@ -334,20 +334,15 @@
     /* Prev / next navigation */
     var arrowL = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="M10 3L5 8l5 5"/></svg>';
     var arrowR = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="M6 3l5 5-5 5"/></svg>';
-    var prevBtn = prevP
-      ? '<a class="work-nav-btn" href="/work/' + prevP.slug + '/" data-nav-slug="' + prevP.slug + '">' +
-          '<span class="work-nav-dir">' + arrowL + '</span>' +
-          '<span class="work-nav-title">' + esc(prevP.title) + '</span>' +
-        '</a>'
-      : '';
     var nextBtn = nextP
       ? '<a class="work-nav-btn" href="/work/' + nextP.slug + '/" data-nav-slug="' + nextP.slug + '">' +
+          '<span class="work-nav-label">Next project</span>' +
           '<span class="work-nav-title">' + esc(nextP.title) + '</span>' +
           '<span class="work-nav-dir">' + arrowR + '</span>' +
         '</a>'
       : '';
-    var navBtns = (prevBtn || nextBtn)
-      ? '<div class="work-nav-btns">' + prevBtn + nextBtn + '</div>'
+    var navBtns = nextBtn
+      ? '<div class="work-nav-btns">' + nextBtn + '</div>'
       : '';
 
     /* Related projects (up to 3, excluding current) */

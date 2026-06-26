@@ -420,9 +420,7 @@ html.js .reveal.d3{transition-delay:.21s;}
 .clients{
   padding:clamp(52px,8vw,96px) 0;
   overflow:hidden;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  background:linear-gradient(180deg,rgba(0,0,0,.018),rgba(0,0,0,0));
+  background:#ffffff;
 }
 .clients-head{max-width:720px;margin-bottom:clamp(28px,4vw,44px);}
 .clients-head h2{
@@ -468,9 +466,6 @@ html.js .reveal.d3{transition-delay:.21s;}
   min-width:clamp(144px,16vw,214px);
   height:72px;
   padding:0 22px;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:rgba(0,0,0,.03);
   color:rgba(0,0,0,.45);
   font-size:.74rem;
   font-weight:650;
@@ -688,11 +683,12 @@ html.js .reveal.d3{transition-delay:.21s;}
 .work-services li::before{content:"";position:absolute;left:0;top:.62em;width:3px;height:3px;border-radius:50%;background:var(--accent);}
 
 /* ── Work detail: prev/next sidebar nav ──────────────── */
-.work-nav-btns{margin-top:clamp(20px,2.5vw,28px);padding-top:clamp(20px,2.5vw,28px);border-top:1px solid var(--line);display:flex;flex-direction:column;gap:2px;}
-.work-nav-btn{display:flex;align-items:center;gap:8px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;transition:border-color .2s,background .2s;}
+.work-nav-btns{margin-top:clamp(20px,2.5vw,28px);padding-top:clamp(20px,2.5vw,28px);border-top:1px solid var(--line);}
+.work-nav-btn{display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;transition:border-color .2s,background .2s;}
 .work-nav-btn:hover{border-color:var(--line-strong);background:var(--bg-soft);}
-.work-nav-dir{flex-shrink:0;font-size:.82rem;color:var(--muted);line-height:1;}
+.work-nav-label{font-size:.64rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted-2);font-weight:600;white-space:nowrap;}
 .work-nav-title{flex:1;font-size:.88rem;font-weight:600;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.work-nav-dir{flex-shrink:0;font-size:.82rem;color:var(--muted);line-height:1;}
 
 /* ── Work detail: related projects at bottom ─────────── */
 .work-related{margin-top:clamp(64px,9vw,110px);padding-top:clamp(36px,4vw,52px);border-top:1px solid var(--line);}
