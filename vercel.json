@@ -66,11 +66,5 @@
       "destination": "/api/auth"
     }
   ],
-  "redirects": [
-    {
-      "source": "/selected-works",
-      "destination": "/work/",
-      "permanent": false
-    }
-  ]
+  "redirects": []
 }
